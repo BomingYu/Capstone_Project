@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@500&display=swap');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -6,16 +8,22 @@
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 150px;
   will-change: filter;
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 10px #054000);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 25px #61fb9caa);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle farthest-side, #517c3b, #86b948);
+  background-repeat: no-repeat;
 }
 
 @keyframes logo-spin {
@@ -39,4 +47,89 @@
 
 .read-the-docs {
   color: #888;
+}
+.navBar{ 
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  background-color: #d7f1da89 !important;
+  height: 85px;
+  z-index: 999;
+}
+
+@media (max-width: 991px) {
+  .navBar {
+    height: auto; 
+    background-color: #d7f1dad9 !important;
+  }
+}
+
+.navBarList{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+
+.navBarText .navDropdownItem{
+  background-color: #d7f1daee;
+}
+
+.navBarText{
+  color: black;
+  font-size: 25px;
+  font-family: 'Saira', sans-serif;
+}
+.navBarText:hover{
+  color: black;
+  text-decoration: underline;
+  font-size: 28px;
+}
+.componnetText{
+  color: black;
+  font-size: 20px;
+  font-family: 'Saira', sans-serif;
+}
+
+.loginWidgesDiv , .signupwidgesDiv{
+  margin-top: 25px;
+  display: flex;
+  gap: 20px;
+}
+.signupwidgesDiv{
+  margin: 0;
+}
+.loginWidges{
+  color: black;
+  text-decoration: underline;
+  text-decoration: none;
+}
+.loginWidges:hover{
+  text-decoration: underline;
+  color: rgb(76, 76, 76);
+}
+.pageContainer{
+  margin-top: 100px;
+}
+.pageTitle{
+  color: black;
+  font-family: 'Saira', sans-serif; 
+  margin-bottom: 30PX;
+}
+
+.loginForm , .signupForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#componentBtn{
+  color: black;
+  font-size: 20px;
+  font-family: 'Saira', sans-serif;
 }
