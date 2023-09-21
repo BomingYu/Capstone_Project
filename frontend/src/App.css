@@ -119,6 +119,12 @@ body {
   font-family: 'Saira', sans-serif; 
   margin-bottom: 30PX;
 }
+.userInputDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .loginForm , .signupForm{
   display: flex;
@@ -126,6 +132,12 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.errorMessage{
+  font-family: 'Saira', sans-serif;
+  font-size: 18px;
+  color: rgb(146, 26, 26);
 }
 
 #componentBtn{
