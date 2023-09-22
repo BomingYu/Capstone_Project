@@ -26,10 +26,10 @@ function SignupComponent() {
     const email = emailInput.value;
 
     if (
-      username != "" &&
-      firstname != "" &&
-      lastname != "" &&
-      password != "" &&
+      username != "" ||
+      firstname != "" ||
+      lastname != "" ||
+      password != "" ||
       email != ""
     ) {
       if (password == renassword) {

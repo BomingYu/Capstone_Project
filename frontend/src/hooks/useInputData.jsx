@@ -7,12 +7,16 @@ const useInputData = (initialValue) => {
         setInputValue(e.target.value);
     }
 
+    function clearInput(){
+        setInputValue("")
+    }
+
     const inputProps = {
         value : inputValue,
         onChange : handleOnChange
     }
 
-    return inputProps;
+    return {...inputProps , clearInput};
 }
 
 export default useInputData;

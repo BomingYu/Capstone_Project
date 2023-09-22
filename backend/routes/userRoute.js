@@ -14,4 +14,8 @@ router.post("/login", (req,res) => {
     Controller.userController.loginUser(req.body , res);
 })
 
+router.put("/:id" , (req, res) => {
+    Controller.userController.changeUserSetting(req,res);
+})
+
 module.exports = router;
