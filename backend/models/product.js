@@ -46,9 +46,8 @@ Product.init({
         type : DataTypes.TEXT,
         allowNull : true
     },
-    picUrl : {
-        type : DataTypes.STRING,
-        allowNull : true
+    picFile : {
+        type : DataTypes.STRING
     },
     available : {
         type : DataTypes.BOOLEAN,

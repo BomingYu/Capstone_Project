@@ -131,7 +131,7 @@ body {
   gap: 15px;
 }
 
-.loginForm , .signupForm , .userSettingForm{
+.loginForm , .signupForm , .userSettingForm , .addNewProductForm{
   display: flex;
   flex-direction: column;
   justify-content: center;

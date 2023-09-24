@@ -2,8 +2,14 @@ require("dotenv").config();
 const express = require("express");
 let dbConnect = require("./dbConnect");
 const userRoute = require("./routes/userRoute")
+const cors = require("cors")
+const productRoute = require("./routes/productRoute")
 
 const app = express();
+app.use(express.json());
+app.use(cors());
+app.use("/" , express.static("public"))
+
 const PORT = 8080;
 
 app.use((req, res, next) => {
@@ -13,9 +19,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.json());
+//app.use(express.json());
 
 app.use("/users", userRoute);
+app.use("/products" , productRoute)
 
 
 app.listen(PORT, () => {
