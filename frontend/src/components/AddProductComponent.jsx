@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import useInputData from "../hooks/useInputData";
 import axios from "axios";
+import AlertMessage from "./AlertComponent";
 
 const AddProductComponent = () => {
   const productName = useInputData("");
@@ -15,7 +16,22 @@ const AddProductComponent = () => {
   const description = useInputData("");
   const [image, setImage] = useState({ preview: "", data: "" });
   const [isChecked, setIsChecked] = useState(true);
-  
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertVariant, setAlertVariant] = useState();
+  const [alertHeading, setAlertHeading] = useState();
+
+  const clearInputs = () => {
+    productName.clearInput();
+    barcode.clearInput();
+    price.clearInput();
+    stock.clearInput();
+    description.clearInput();
+    setErrorMessage("");
+    const fileInput = document.getElementById("fileInput");
+    fileInput.value = "";
+    setImage({ preview: "", data: "" });
+  };
 
   const handleCheckBox = () => {
     setIsChecked(!isChecked);
@@ -41,31 +57,34 @@ const AddProductComponent = () => {
 
   const handleAddNewProduct = (e) => {
     e.preventDefault();
-    // console.log(productName.value);
-    // console.log(barcode.value);
-    // console.log(category);
-    // console.log(price.value);
-    // console.log(unit);
-    // console.log(stock.value);
-    // console.log(description.value);
-    // console.log(image);
-    // console.log(isChecked);
 
     const formData = new FormData();
-    formData.append("name" , productName.value);
-    formData.append("barcode" , barcode.value);
-    formData.append("category" , category);
-    formData.append("price" , price.value);
-    formData.append("unit" , unit);
-    formData.append("stock" , stock.value);
-    formData.append("description" , description.value);
-    formData.append("file" , image.data);
-    formData.append("available" , isChecked);
+    formData.append("name", productName.value);
+    formData.append("barcode", barcode.value);
+    formData.append("category", category);
+    formData.append("price", price.value);
+    formData.append("unit", unit);
+    formData.append("stock", stock.value);
+    formData.append("description", description.value);
+    formData.append("file", image.data);
+    formData.append("available", isChecked);
 
-    axios.post("http://localhost:8080/products/add" , formData)
-    .then(response => {
-      console.log(response)
-    })
+    axios
+      .post("http://localhost:8080/products/add", formData)
+      .then((response) => {
+        clearInputs();
+        setAlertVariant("primary");
+        setAlertHeading("The New Product Added successfully!");
+        setShowAlert(true);
+      })
+      .catch((error) => {
+        if (error.response) {
+          setAlertVariant("danger");
+          setAlertHeading(error.response.data);
+          setShowAlert(true);
+          //setErrorMessage(error.response.data);
+        }
+      });
   };
 
   return (
@@ -101,7 +120,12 @@ const AddProductComponent = () => {
           <InputGroup.Text id="basic-addon1" className="componnetText">
             $
           </InputGroup.Text>
-          <Form.Control type="text" placeholder="Price" className="componnetText" {...price}/>
+          <Form.Control
+            type="text"
+            placeholder="Price"
+            className="componnetText"
+            {...price}
+          />
           <InputGroup.Text id="basic-addon1" className="componnetText">
             /
           </InputGroup.Text>
@@ -136,6 +160,7 @@ const AddProductComponent = () => {
           <Form.Control
             type="file"
             className="componnetText"
+            id="fileInput"
             onChange={handleFileChange}
           />
         </Form.Label>
@@ -147,6 +172,15 @@ const AddProductComponent = () => {
           checked={isChecked}
           onChange={handleCheckBox}
         />
+        <div>
+          <AlertMessage
+            show={showAlert}
+            onClose={() => setShowAlert(false)}
+            variant={alertVariant}
+            heading={alertHeading}
+            className={alertVariant}
+          ></AlertMessage>
+        </div>
         <Button variant="light" id="componentBtn" type="submit">
           Add
         </Button>

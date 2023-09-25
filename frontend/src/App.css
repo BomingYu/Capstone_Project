@@ -54,7 +54,7 @@ body {
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
-  background-color: #d7f1da89 !important;
+  background-color: #d7f1dac2 !important;
   height: 85px;
   z-index: 999;
 }
@@ -118,6 +118,10 @@ body {
 .pageContainer{
   margin-top: 100px;
 }
+
+.addNewProductPage{
+  margin-top: 170px;
+}
 .pageTitle{
   color: black;
   font-family: 'Saira', sans-serif; 
@@ -144,12 +148,39 @@ body {
   font-size: 18px;
   color: rgb(146, 26, 26);
 }
-.alert{
+.primary{
   background-color: #95b984 !important;
   border: #517c3b !important;
 }
-.alertHeading{
+.alertHeading , .productCard{
   font-family: 'Saira', sans-serif;
+}
+
+.rateThumb{
+  height: 50px;
+  width: 50px;
+}
+.productImg{
+  height: 180px;
+  width: auto;
+}
+.thumbsDiv{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 7px;
+}
+.cardBtnDiv{
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+.productList{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 #componentBtn{

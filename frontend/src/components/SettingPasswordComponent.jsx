@@ -16,13 +16,13 @@ function SettingPasswordComponent() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
-  const [alertVariant, setAlertVariant] = useState('');
-  const [alertHeading , setAlertHeading] = useState('');
+  const [alertVariant, setAlertVariant] = useState("");
+  const [alertHeading, setAlertHeading] = useState("");
 
   const clearInputs = () => {
-    pwordInput.clearInput()
-    newPword.clearInput()
-    reNewPword.clearInput()
+    pwordInput.clearInput();
+    newPword.clearInput();
+    reNewPword.clearInput();
   };
 
   const handleSubmit = (e) => {
@@ -33,25 +33,32 @@ function SettingPasswordComponent() {
     const reNewPassword = reNewPword.value;
 
     if (newPassword !== reNewPassword) {
-      setErrorMessage("Two new passwords do not match!");
+      setAlertVariant("danger");
+      setAlertHeading("Two new passwords do not match!");
+      setShowAlert(true);
     }
     if (newPassword == "" || reNewPassword == "") {
-      setErrorMessage("The new password cannot be empty!");
-    } 
-    if(newPassword === reNewPassword) {
+      setAlertVariant("danger");
+      setAlertHeading("The new password cannot be empty!");
+      setShowAlert(true);
+    }
+    if (newPassword === reNewPassword) {
       const newData = { oldPasswor: password, newPassword: newPassword };
       axios
         .put("http://localhost:8080/users/" + id, newData)
         .then((response) => {
-          setAlertVariant("primary")
+          setAlertVariant("primary");
           setAlertHeading("Password updated successfully!");
-          setShowAlert(true)
-          clearInputs()
-          setErrorMessage("")
+          setShowAlert(true);
+          clearInputs();
+          setErrorMessage("");
         })
         .catch((error) => {
-          if (error.response){
-            setErrorMessage(error.response.data)
+          if (error.response) {
+            setAlertVariant("danger");
+            setAlertHeading(error.response.data);
+            setShowAlert(true);
+            //setErrorMessage(error.response.data)
           }
         });
     }
@@ -60,8 +67,13 @@ function SettingPasswordComponent() {
   return (
     <div className="userInputDiv">
       <div>
-        <p className="errorMessage">{errorMessage}</p>
-      </div>
+          <AlertMessage
+            show={showAlert}
+            onClose={() => setShowAlert(false)}
+            variant={alertVariant}
+            heading={alertHeading}
+          ></AlertMessage>
+        </div>
       <Form className="userSettingForm" onSubmit={handleSubmit}>
         <Form.Control
           type="password"
@@ -81,12 +93,11 @@ function SettingPasswordComponent() {
           placeholder="Re-New Password"
           {...reNewPword}
         />
+        
         <Button variant="light" id="componentBtn" type="submit">
           Save
         </Button>
       </Form>
-
-      <AlertMessage show={showAlert} onClose={() => setShowAlert(false)} variant={alertVariant} heading={alertHeading}></AlertMessage>
     </div>
   );
 }

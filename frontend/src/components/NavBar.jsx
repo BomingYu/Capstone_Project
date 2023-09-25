@@ -29,15 +29,9 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="navBarList">
             <NavDropdown title="Products" className="navBarText">
-              <NavLink
-                className="navBarText navDropdownItem"
-              >
-                Category
-              </NavLink>
+              <NavLink className="navBarText navDropdownItem">Category</NavLink>
               <NavDropdown.Divider />
-              <NavLink
-                className="navBarText navDropdownItem"
-              >
+              <NavLink className="navBarText navDropdownItem">
                 All Products
               </NavLink>
             </NavDropdown>
@@ -63,6 +57,15 @@ function NavBar() {
                 Login
               </NavLink>
             )}
+
+            <NavDropdown title="Admin" className="navBarText">
+              <NavLink
+                className="navBarText navDropdownItem"
+                to={"/adminProduct/add"}
+              >
+                New Product
+              </NavLink>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

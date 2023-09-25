@@ -7,8 +7,29 @@ const getAllProducts = (req,res) => {
 }
 
 const addNewProduct = (req,res) => {
-    console.log(req.file)
-    res.send("response from controller, checking the req now")
+    console.log(req.file.path)
+    console.log(req.body.name)
+    const productData = {
+        name : req.body.name,
+        barcode : req.body.barcode,
+        category : req.body.category,
+        price : req.body.price,
+        unit : req.body.unit,
+        stock : req.body.stock,
+        description : req.body.description,
+        picFile : req.file.path,
+        available : req.body.available
+    }
+
+    Model.Product.create(productData)
+    .then((product) => res.status(200).send({ result: 200, data: product }))
+    .catch((error) => {
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            res.status(400).send("The product name is exsited already!");
+          } else {
+            res.status(500).send({ result: 500, data: error });
+          }
+    });
 }
 
 module.exports = {getAllProducts , addNewProduct}
