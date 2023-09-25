@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import useInputData from "../hooks/useInputData";
 import axios from "axios";
-import { useState } from "react";
+import React ,{ useState } from "react";
 import { useUserContext } from "../contexts/userContext";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,8 @@ function LoginComponent() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
+    console.log(userEmail.value)
+    console.log(userPassword.value)
     if (userEmail.value != "" || userPassword.value != "") {
       const userData = { email: userEmail.value, password: userPassword.value };
 
@@ -38,12 +39,11 @@ function LoginComponent() {
           if (error.response.status == 404) {
             setErrorMessage(error.response.data);
           } else {
-            setErrorMessage(error.response.data)
+            setErrorMessage(error.response.data);
           }
         });
-    }
-    else{
-      setErrorMessage("Please enter email and password to login.")
+    } else {
+      setErrorMessage("Please enter email and password to login.");
     }
   };
 

@@ -1,6 +1,5 @@
 const { DataTypes , Model } = require("sequelize");
 const connectdb = require("../dbConnect");
-const { dataTool } = require("echarts");
 const sequelizeInstance = connectdb.Sequelize;
 
 class Product extends Model {}

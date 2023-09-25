@@ -122,6 +122,20 @@ body {
 .addNewProductPage{
   margin-top: 170px;
 }
+.productPage{
+  margin-top: 550px;
+}
+.productListPageBody{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.pagination{
+  font-family: 'Saira', sans-serif; 
+  display: flex;
+  gap: 5px;
+}
 .pageTitle{
   color: black;
   font-family: 'Saira', sans-serif; 

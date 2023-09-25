@@ -58,33 +58,47 @@ const AddProductComponent = () => {
   const handleAddNewProduct = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("name", productName.value);
-    formData.append("barcode", barcode.value);
-    formData.append("category", category);
-    formData.append("price", price.value);
-    formData.append("unit", unit);
-    formData.append("stock", stock.value);
-    formData.append("description", description.value);
-    formData.append("file", image.data);
-    formData.append("available", isChecked);
+    if (
+      productName.value == "" ||
+      category == "" ||
+      price.value == "" ||
+      unit == ""
+    ) {
+      setAlertVariant("danger");
+      setAlertHeading(
+        "Product Name, Category, Price and Unit Cannot Be Empty!"
+      );
+      setShowAlert(true);
+    } else {
+      const formData = new FormData();
+      formData.append("name", productName.value);
+      formData.append("barcode", barcode.value);
+      formData.append("category", category);
+      formData.append("price", price.value);
+      formData.append("unit", unit);
+      formData.append("stock", stock.value);
+      formData.append("description", description.value);
+      formData.append("file", image.data);
+      formData.append("available", isChecked);
 
-    axios
-      .post("http://localhost:8080/products/add", formData)
-      .then((response) => {
-        clearInputs();
-        setAlertVariant("primary");
-        setAlertHeading("The New Product Added successfully!");
-        setShowAlert(true);
-      })
-      .catch((error) => {
-        if (error.response) {
-          setAlertVariant("danger");
-          setAlertHeading(error.response.data);
-          setShowAlert(true);
-          //setErrorMessage(error.response.data);
-        }
-      });
+      axios
+        .post("http://localhost:8080/products/add", formData)
+        .then((response) => {
+           //clearInputs();
+           setAlertVariant("primary");
+           setAlertHeading(
+             `${response.data.data.name} has been added successfully!`
+           );
+           setShowAlert(true);
+        })
+        .catch((error) => {
+          if (error.response) {
+            setAlertVariant("danger");
+            setAlertHeading(error.response.data);
+            setShowAlert(true);
+          }
+        });
+    }
   };
 
   return (
@@ -113,6 +127,7 @@ const AddProductComponent = () => {
           <option>Fruit</option>
           <option>Vegetable</option>
           <option>Dairy</option>
+          <option>Seasoning</option>
           <option>Drink</option>
           <option>Misc</option>
         </Form.Select>
@@ -172,6 +187,9 @@ const AddProductComponent = () => {
           checked={isChecked}
           onChange={handleCheckBox}
         />
+        <Button variant="light" id="componentBtn" type="submit">
+          Add
+        </Button>
         <div>
           <AlertMessage
             show={showAlert}
@@ -181,10 +199,8 @@ const AddProductComponent = () => {
             className={alertVariant}
           ></AlertMessage>
         </div>
-        <Button variant="light" id="componentBtn" type="submit">
-          Add
-        </Button>
       </Form>
+      
     </div>
   );
 };
