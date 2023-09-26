@@ -7,13 +7,13 @@ import axios from "axios";
 import AlertMessage from "./AlertComponent";
 
 const AddProductComponent = () => {
-  const productName = useInputData("");
-  const barcode = useInputData("");
+  const [productName , clearProductName] = useInputData("");
+  const [barcode , clearBarcode] = useInputData("");
   const [category, setCategory] = useState("");
-  const price = useInputData("");
+  const [price , clearPrice] = useInputData("");
   const [unit, setUnit] = useState("");
-  const stock = useInputData("");
-  const description = useInputData("");
+  const [stock , clearStock] = useInputData("");
+  const [description , clearDescription] = useInputData("");
   const [image, setImage] = useState({ preview: "", data: "" });
   const [isChecked, setIsChecked] = useState(true);
 
@@ -22,12 +22,13 @@ const AddProductComponent = () => {
   const [alertHeading, setAlertHeading] = useState();
 
   const clearInputs = () => {
-    productName.clearInput();
-    barcode.clearInput();
-    price.clearInput();
-    stock.clearInput();
-    description.clearInput();
-    setErrorMessage("");
+    clearProductName();
+    clearBarcode();
+    setCategory("")
+    clearPrice();
+    setUnit("")
+    clearStock();
+    clearDescription();
     const fileInput = document.getElementById("fileInput");
     fileInput.value = "";
     setImage({ preview: "", data: "" });
@@ -84,7 +85,7 @@ const AddProductComponent = () => {
       axios
         .post("http://localhost:8080/products/add", formData)
         .then((response) => {
-           //clearInputs();
+           clearInputs();
            setAlertVariant("primary");
            setAlertHeading(
              `${response.data.data.name} has been added successfully!`

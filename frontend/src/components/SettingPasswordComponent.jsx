@@ -9,20 +9,18 @@ import axios from "axios";
 function SettingPasswordComponent() {
   const { user } = useUserContext();
 
-  const pwordInput = useInputData("");
-  const newPword = useInputData("");
-  const reNewPword = useInputData("");
-
-  const [errorMessage, setErrorMessage] = useState("");
+  const [pwordInput , clearOldPword] = useInputData("");
+  const [newPword , clearNewPword] = useInputData("");
+  const [reNewPword , clearReNewPword] = useInputData("");
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertVariant, setAlertVariant] = useState("");
   const [alertHeading, setAlertHeading] = useState("");
 
   const clearInputs = () => {
-    pwordInput.clearInput();
-    newPword.clearInput();
-    reNewPword.clearInput();
+    clearOldPword()
+    clearNewPword();
+    clearReNewPword()
   };
 
   const handleSubmit = (e) => {
@@ -51,14 +49,12 @@ function SettingPasswordComponent() {
           setAlertHeading("Password updated successfully!");
           setShowAlert(true);
           clearInputs();
-          setErrorMessage("");
         })
         .catch((error) => {
           if (error.response) {
             setAlertVariant("danger");
             setAlertHeading(error.response.data);
             setShowAlert(true);
-            //setErrorMessage(error.response.data)
           }
         });
     }

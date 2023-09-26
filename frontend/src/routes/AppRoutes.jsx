@@ -5,6 +5,7 @@ import SignupPage from "../pages/SignupPage";
 import SettingPasswordPage from "../pages/SettingPassworPage";
 import ProtectedRoute from "./ProtectedRoutes";
 import AddProductPage from "../pages/AddProductPage";
+import ProductPage, { AllProducts, ProductByCategory } from "../pages/ProductPage";
 
 function AppRoutes(props){
     return(
@@ -14,6 +15,10 @@ function AppRoutes(props){
             <Route path="/signup" element={<SignupPage {...props}/>}/>
             <Route path="/settingPassword" element={<ProtectedRoute><SettingPasswordPage {...props}/></ProtectedRoute>}/>
             <Route path="/adminProduct/add" element={<AddProductPage {...props} />}/>
+            <Route path="/products" element={<ProductPage {...props} />}>
+                <Route index element={<AllProducts />}/>
+                <Route path="byCategory/:category" element={<ProductByCategory />}/>
+            </Route>
         </Routes>
     )
 }

@@ -8,14 +8,17 @@ import { useUserContext } from "../contexts/userContext";
 import { useNavigate } from "react-router-dom";
 
 function LoginComponent() {
-  const userEmail = useInputData("");
-  const userPassword = useInputData("");
+  const [userEmail] = useInputData("");
+  const [userPassword]= useInputData("");
+  
   const [errorMessage, setErrorMessage] = useState("");
   const { user, setUser } = useUserContext();
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+    console.log(userEmail)
+  console.log(userPassword)
     console.log(userEmail.value)
     console.log(userPassword.value)
     if (userEmail.value != "" || userPassword.value != "") {

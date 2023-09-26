@@ -29,9 +29,14 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="navBarList">
             <NavDropdown title="Products" className="navBarText">
-              <NavLink className="navBarText navDropdownItem">Category</NavLink>
+              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Fruit"}>Fruit</NavLink><br/>
+              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Vegetable"}>Vegetable</NavLink><br/>
+              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Dairy"}>Dairy</NavLink><br/>
+              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Seasoning"}>Seasoning</NavLink><br/>
+              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Drink"}>Drink</NavLink><br/>
+              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Misc"}>Misc</NavLink>
               <NavDropdown.Divider />
-              <NavLink className="navBarText navDropdownItem">
+              <NavLink className="navBarText navDropdownItem" to={"/products"}>
                 All Products
               </NavLink>
             </NavDropdown>

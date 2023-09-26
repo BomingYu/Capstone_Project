@@ -2,7 +2,7 @@ const Model = require("../models")
 
 const getAllProducts = (req,res) => {
     Model.Product.findAll({})
-    .then(products => res.send({reslt:200 , data:products}))
+    .then(products => res.status(200).send({reslt:200 , data:products}))
     .catch(error => res.send({result:500 , data:error}))
 }
 
@@ -32,4 +32,10 @@ const addNewProduct = (req,res) => {
     });
 }
 
-module.exports = {getAllProducts , addNewProduct}
+const getProductsByCategory = (req,res) => {
+    const category = req.params.category;
+    Model.Product.findAll({where: {category : category}})
+    .then(products => res.status(200).send({result:200 , data : products}))
+}
+
+module.exports = {getAllProducts , addNewProduct , getProductsByCategory}

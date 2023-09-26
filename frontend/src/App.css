@@ -20,7 +20,7 @@
 }
 
 body {
-  height: 100vh;
+  
   margin: 0;
   background: radial-gradient(circle farthest-side, #517c3b, #86b948);
   background-repeat: no-repeat;
@@ -99,6 +99,7 @@ body {
 }
 
 .loginWidgesDiv , .signupwidgesDiv{
+  font-family: 'Saira', sans-serif; 
   margin-top: 25px;
   display: flex;
   gap: 20px;
@@ -116,14 +117,15 @@ body {
   color: rgb(76, 76, 76);
 }
 .pageContainer{
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 .addNewProductPage{
-  margin-top: 170px;
+  margin-top: 150px;
 }
 .productPage{
-  margin-top: 550px;
+  font-family: 'Saira', sans-serif; 
+  margin-top: 150px;
 }
 .productListPageBody{
   display: flex;

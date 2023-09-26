@@ -6,14 +6,23 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignupComponent() {
-  const userNameInput = userInputData("");
-  const firstNameInput = userInputData("");
-  const lastNameInput = userInputData("");
-  const pwordInput = userInputData("");
-  const rePwordInput = userInputData("");
-  const emailInput = userInputData("");
+  const [userNameInput , clearUserName] = userInputData("");
+  const [firstNameInput , clearFirstName] = userInputData("");
+  const [lastNameInput , clearLastName] = userInputData("");
+  const [pwordInput , clearPassword] = userInputData("");
+  const [rePwordInput , clearRePword] = userInputData("");
+  const [emailInput , clearEmail] = userInputData("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigat = useNavigate();
+
+  const clearInputs = () => {
+    clearUserName();
+    clearFirstName();
+    clearLastName();
+    clearPassword();
+    clearRePword()
+    clearEmail();
+  }
 
   function handleSignup(e) {
     e.preventDefault();
@@ -47,6 +56,7 @@ function SignupComponent() {
               console.log("Registration successful:", response.data.data.errors[0].message);
               const errorMessage=`${email} already exists. ${response.data.data.errors[0].message}.`
               setErrorMessage(errorMessage);
+              clearInputs();
             }
             if(response.data.result == 200){
               console.log("Registration successful:", response.data.data);
@@ -55,13 +65,16 @@ function SignupComponent() {
           })
           .catch((error) => {
             console.error("Registration failed:", error);
+            clearInputs();
           });
       }
       else{
-        setErrorMessage("Two password settings do not match!")
+        setErrorMessage("Two password settings do not match!");
+        clearInputs();
       }
     } else {
       setErrorMessage("All Textboxes are required!");
+      clearInputs();
     }
   }
   return (

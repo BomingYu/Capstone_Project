@@ -13,11 +13,10 @@ const useInputData = (initialValue) => {
 
     const inputProps = {
         value : inputValue,
-        onChange : handleOnChange,
-        clearInput : clearInput
+        onChange : handleOnChange
     }
 
-    return inputProps;
+    return [inputProps , clearInput];
 }
 
 export default useInputData;

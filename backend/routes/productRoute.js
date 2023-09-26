@@ -11,4 +11,8 @@ router.post("/add" , uploadFile , (req,res) => {
     Controller.productController.addNewProduct(req,res)
 })
 
+router.get("/byCategory/:category" , (req,res) => {
+    Controller.productController.getProductsByCategory(req,res)
+})
+
 module.exports = router;
