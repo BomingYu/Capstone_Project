@@ -51,6 +51,25 @@ export default function ProductPage() {
   );
 }
 
+const getUpCount = (arr) =>{
+  let count = 0;
+  for(let i=0 ; i<arr.length ; i++){
+    if(arr[i].rate == "up"){
+      count++
+    }
+  }
+  return count;
+}
+const getDownCount = (arr) => {
+  let count = 0;
+  for(let i=0 ; i<arr.length ; i++){
+    if(arr[i].rate == "down"){
+      count++
+    }
+  }
+  return count;
+}
+
 export function AllProducts() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -125,6 +144,8 @@ export function AllProducts() {
             title={product.name}
             price={product.price}
             unit={product.unit}
+            up={getUpCount(product.rates)}
+            down={getDownCount(product.rates)}
           />
         ))}
       </div>
@@ -229,6 +250,8 @@ export function ProductByCategory() {
             title={product.name}
             price={product.price}
             unit={product.unit}
+            up={getUpCount(product.rates)}
+            down={getDownCount(product.rates)}
           />
         ))}
       </div>
@@ -260,3 +283,5 @@ export function ProductByCategory() {
     </div>
   );
 }
+
+

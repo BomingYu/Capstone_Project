@@ -15,4 +15,8 @@ router.get("/byCategory/:category" , (req,res) => {
     Controller.productController.getProductsByCategory(req,res)
 })
 
+router.get("/getProductWithRate" , (req,res) => {
+    Controller.productController.getProductWithRate(req,res)
+})
+
 module.exports = router;

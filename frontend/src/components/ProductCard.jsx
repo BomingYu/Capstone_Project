@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import thumbUp from "../assets/icons/thumb-up.png";
 import thumpDown from "../assets/icons/thumb-down.png";
 
-function ProducrCard({id , picUrl , title , price , unit }) {
+function ProducrCard({id , picUrl , title , price , unit , up , down}) {
   return (
     <Card style={{ width: "18rem" }} className="productCard" key={id}>
       <Card.Img variant="top" src={picUrl} className="productImg"/>
@@ -17,14 +17,14 @@ function ProducrCard({id , picUrl , title , price , unit }) {
             className="rateThumb"
             style={{ width: "24px", height: "24px" }}
           />
-          <span>X</span>
+          <span>{up}</span>
           <Card.Img
             variant="top"
             src={thumpDown}
             className="rateThumb"
             style={{ width: "24px", height: "24px" }}
           />
-          <span>Y</span>
+          <span>{down}</span>
         </div>
         <div className="cardBtnDiv">
           <Button variant="secondary" >Details</Button>

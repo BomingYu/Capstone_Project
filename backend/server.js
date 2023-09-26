@@ -4,6 +4,7 @@ let dbConnect = require("./dbConnect");
 const userRoute = require("./routes/userRoute")
 const cors = require("cors")
 const productRoute = require("./routes/productRoute")
+const rateRoute = require("./routes/rateRoute")
 
 const app = express();
 app.use(express.json());
@@ -22,8 +23,8 @@ app.use((req, res, next) => {
 //app.use(express.json());
 
 app.use("/users", userRoute);
-app.use("/products" , productRoute)
-
+app.use("/products" , productRoute);
+app.use("/rates" , rateRoute);
 
 app.listen(PORT, () => {
     console.log("Listen on port " + PORT)
