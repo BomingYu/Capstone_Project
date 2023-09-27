@@ -51,7 +51,8 @@ const getProductsByCategory = (req,res) => {
 const getProductWithRate = (req,res) => {
     Model.Product.findAll({
         include : [{
-            model : Model.Rate
+            model : Model.Rate,
+            attributes:["rate"]
         }]
     })
     .then(response => {
@@ -64,4 +65,26 @@ const getProductWithRate = (req,res) => {
     })
 }
 
-module.exports = {getAllProducts , addNewProduct , getProductsByCategory , getProductWithRate}
+const getProductById = (req,res) => {
+    const id = req.params.id;
+    console.log(id);
+    Model.Product.findByPk(id , {
+        include:[{
+            model:Model.Rate,
+            attributes:["rate"]
+        },
+        {
+            model:Model.Comment
+        }
+    ]
+    })
+    .then(response => {
+        res.status(200).json({result:200 , data:response})
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send({result:500, data:error})
+    })
+}
+
+module.exports = {getAllProducts , addNewProduct , getProductsByCategory , getProductWithRate , getProductById}

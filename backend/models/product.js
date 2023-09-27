@@ -1,6 +1,7 @@
 const { DataTypes , Model } = require("sequelize");
 const connectdb = require("../dbConnect");
 const Rate = require("./rate")
+const Comment = require("./cooment")
 const sequelizeInstance = connectdb.Sequelize;
 class Product extends Model {}
 
@@ -62,5 +63,6 @@ Product.init({
 })
 
 Product.hasMany(Rate , {foreignKey : "productid"})
+Product.hasMany(Comment , {foreignKey : "productid"})
 
 module.exports = Product;

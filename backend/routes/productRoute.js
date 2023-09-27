@@ -19,4 +19,8 @@ router.get("/getProductWithRate" , (req,res) => {
     Controller.productController.getProductWithRate(req,res)
 })
 
+router.get("/byId/:id" , (req,res) => {
+    Controller.productController.getProductById(req,res)
+})
+
 module.exports = router;

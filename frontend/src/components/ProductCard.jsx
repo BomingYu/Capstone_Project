@@ -2,8 +2,15 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import thumbUp from "../assets/icons/thumb-up.png";
 import thumpDown from "../assets/icons/thumb-down.png";
+import { useNavigate } from "react-router-dom";
 
-function ProducrCard({id , picUrl , title , price , unit , up , down}) {
+function ProducrCard({ id, picUrl , title , price , unit , up , down}) {
+  const navigate = useNavigate();
+
+  const handleDetailButton = () => {
+    navigate("/products/byId/" + id)
+  }
+
   return (
     <Card style={{ width: "18rem" }} className="productCard" key={id}>
       <Card.Img variant="top" src={picUrl} className="productImg"/>
@@ -27,7 +34,7 @@ function ProducrCard({id , picUrl , title , price , unit , up , down}) {
           <span>{down}</span>
         </div>
         <div className="cardBtnDiv">
-          <Button variant="secondary" >Details</Button>
+          <Button variant="secondary" onClick={handleDetailButton}>Details</Button>
           <Button variant="warning">Add To Cart</Button>
         </div>
       </Card.Body>

@@ -5,6 +5,10 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import axios from "axios";
+import ProductDetailComponent from "../components/ProductDetailComponent";
+import CommentInputComponent from "../components/CommentInputComponent";
+import CommentComponent from "../components/CommentComponent";
+import { useUserContext } from "../contexts/userContext";
 
 const ascendingNameSort = (arr) => {
   const sortedOutput = [...arr].sort((a, b) => {
@@ -51,24 +55,30 @@ export default function ProductPage() {
   );
 }
 
-const getUpCount = (arr) =>{
+const getUpCount = (arr) => {
   let count = 0;
-  for(let i=0 ; i<arr.length ; i++){
-    if(arr[i].rate == "up"){
-      count++
+  if (!arr || arr.length === 0) {
+    return 0;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].rate == "up") {
+      count++;
     }
   }
   return count;
-}
+};
 const getDownCount = (arr) => {
   let count = 0;
-  for(let i=0 ; i<arr.length ; i++){
-    if(arr[i].rate == "down"){
-      count++
+  if (!arr || arr.length === 0) {
+    return 0;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].rate == "down") {
+      count++;
     }
   }
   return count;
-}
+};
 
 export function AllProducts() {
   const [products, setProducts] = useState([]);
@@ -139,6 +149,7 @@ export function AllProducts() {
       <div className="productList">
         {currentProducts.map((product) => (
           <ProducrCard
+            id={product.id}
             key={product.id}
             picUrl={"http://localhost:8080/" + product.picFile}
             title={product.name}
@@ -199,7 +210,10 @@ export function ProductByCategory() {
 
   const lastProductIndex = currentPage * productsPerPage;
   const firstProductIndex = lastProductIndex - productsPerPage;
-  const currentProducts = displayProducts.slice(firstProductIndex, lastProductIndex);
+  const currentProducts = displayProducts.slice(
+    firstProductIndex,
+    lastProductIndex
+  );
   const maxPage = Math.ceil(products.length / productsPerPage);
 
   const handlePageChange = (newPage) => {
@@ -245,6 +259,7 @@ export function ProductByCategory() {
       <div className="productList">
         {currentProducts.map((product) => (
           <ProducrCard
+            id={product.id}
             key={product.id}
             picUrl={"http://localhost:8080/" + product.picFile}
             title={product.name}
@@ -284,4 +299,47 @@ export function ProductByCategory() {
   );
 }
 
+export function ProductDetailPage() {
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+  const { user } = useUserContext();
 
+  useEffect(() => {
+    axios.get("http://localhost:8080/products/byId/" + id).then((response) => {
+      setProduct(response.data.data);
+    });
+  }, [id]);
+
+  const handleTest = () => {
+    console.log(user);
+  };
+
+  return (
+    <div className="detailDiv">
+      <ProductDetailComponent
+        picFile={"http://localhost:8080/" + product.picFile}
+        name={product.name}
+        price={product.price}
+        unit={product.unit}
+        description={product.description}
+        up={getUpCount(product.rates)}
+        down={getDownCount(product.rates)}
+      />
+      <button onClick={handleTest}>test {id}</button>
+      <CommentInputComponent userid={1} productid={product.id} />
+
+        <div className="commentsDiv">
+          {product.comments &&
+            product.comments.length > 0 &&
+            product.comments.map((comment) => (
+              <CommentComponent
+                key={comment.id}
+                time={comment.createdAt}
+                body={comment.body}
+              />
+            ))}
+        </div>
+
+    </div>
+  );
+}

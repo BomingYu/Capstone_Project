@@ -166,7 +166,19 @@ body {
   flex-direction: column;
   gap: 10px;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.detailDiv{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.commentsDiv{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .errorMessage{
@@ -232,6 +244,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 #componentBtn{
