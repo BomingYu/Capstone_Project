@@ -186,6 +186,15 @@ body {
   align-items: center;
   gap: 7px;
 }
+.detailWeidges{
+  display: flex;
+  gap: 25px;
+}
+.thumbsDivInDetail{
+  display: flex;
+  gap:5px;
+  margin-bottom: 10px;
+}
 .cardBtnDiv{
   margin-top: 15px;
   display: flex;
@@ -197,6 +206,18 @@ body {
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+.commentCard{
+  background-color: rgba(255, 255, 255, 0.7) !important;
+}
+.productDetailPic{
+  height: 250px;
+}
+.productDetail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #componentBtn{

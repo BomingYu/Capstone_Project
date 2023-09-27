@@ -1,5 +1,7 @@
 import { useUserContext } from "../contexts/userContext";
 import ProductListComponent from "../components/ProductListComponent";
+import CommentComponent from "../components/CommentComponent";
+import ProductDetailComponent from "../components/ProductDetailComponent";
 
 function HomePage() {
 
@@ -11,7 +13,9 @@ function HomePage() {
       ) : (
         <h1 className="pageTitle">Welcome!</h1>
       )}
-      <ProductListComponent />
+      
+      <ProductDetailComponent />
+      <CommentComponent />
     </div>
   );
 }
