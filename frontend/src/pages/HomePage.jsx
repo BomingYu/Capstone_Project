@@ -2,6 +2,7 @@ import { useUserContext } from "../contexts/userContext";
 import ProductListComponent from "../components/ProductListComponent";
 import CommentComponent from "../components/CommentComponent";
 import ProductDetailComponent from "../components/ProductDetailComponent";
+import CommentInputComponent from "../components/CommentInputComponent";
 
 function HomePage() {
 
@@ -15,6 +16,7 @@ function HomePage() {
       )}
       
       <ProductDetailComponent />
+      <CommentInputComponent />
       <CommentComponent />
     </div>
   );

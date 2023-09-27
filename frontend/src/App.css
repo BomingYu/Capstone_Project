@@ -151,12 +151,22 @@ body {
   gap: 15px;
 }
 
-.loginForm , .signupForm , .userSettingForm , .addNewProductForm{
+.loginForm , .signupForm , .userSettingForm , .addNewProductForm , .commentInputForm{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.commentInputDiv{
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .errorMessage{
@@ -185,6 +195,10 @@ body {
   justify-content: flex-end;
   align-items: center;
   gap: 7px;
+}
+.rateInput{
+  display: flex;
+  gap: 10px;
 }
 .detailWeidges{
   display: flex;
