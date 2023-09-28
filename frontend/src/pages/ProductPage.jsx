@@ -305,7 +305,8 @@ export function ProductDetailPage() {
   const { user } = useUserContext();
 
   useEffect(() => {
-    axios.get("http://localhost:8080/products/byId/" + id).then((response) => {
+    axios.get("http://localhost:8080/products/byId/" + id)
+    .then((response) => {
       setProduct(response.data.data);
     });
   }, [id]);
@@ -317,7 +318,8 @@ export function ProductDetailPage() {
   return (
     <div className="detailDiv">
       <ProductDetailComponent
-        picFile={"http://localhost:8080/" + product.picFile}
+        id = {product.id}
+        picFile={product.picFile?"http://localhost:8080/" + product.picFile:""}
         name={product.name}
         price={product.price}
         unit={product.unit}

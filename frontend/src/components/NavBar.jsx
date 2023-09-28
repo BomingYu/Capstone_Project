@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "../assets/logo/logo.png";
+import basket from "../assets/icons/basket.png"
 import { useUserContext } from "../contexts/userContext";
 
 function NavBar() {
@@ -71,7 +72,10 @@ function NavBar() {
                 New Product
               </NavLink>
             </NavDropdown>
+            
           </Nav>
+          {user? <NavLink className="navBarText myCartLink" to={"/carts"}><img src={basket} alt="My Cart" className="myCartBasket logo"/></NavLink> : null}
+          
         </Navbar.Collapse>
       </Container>
     </Navbar>

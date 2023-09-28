@@ -1,3 +1,4 @@
+import CartComponent from "../components/CartComponent";
 import { useUserContext } from "../contexts/userContext";
 
 function HomePage() {
@@ -9,6 +10,7 @@ function HomePage() {
       ) : (
         <h1 className="pageTitle">Welcome!</h1>
       )}
+      <CartComponent />
     </div>
   );
 }

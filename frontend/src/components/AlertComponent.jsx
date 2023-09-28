@@ -5,6 +5,7 @@ function AlertMessage({show , onClose , variant ,heading }){
         show && (
             <Alert variant={variant} onClose={onClose} dismissible className={variant}>
                 <Alert.Heading >{heading}</Alert.Heading>
+
             </Alert>
         )
     )
