@@ -1,6 +1,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import axios from "axios";
 
 const CartComponent = ({
   id,
@@ -11,16 +12,28 @@ const CartComponent = ({
   stock,
   quantity,
   subtotal,
+  onDelete
 }) => {
   const [cartQuantity, setQuantity] = useState(quantity);
   const [cartSubtotal, setCartSubtotal] = useState(subtotal);
 
   const handleUpdate = () => {
-    console.log(id)
+    console.log(id);
+    console.log(cartQuantity);
+    const cartData = {
+      quantity : cartQuantity
+    }
+    axios.put("http://localhost:8080/carts/update/"+id , cartData)
+    .then((response) => {
+      console.log("Done");
+    })
+    .catch((error) => {
+      console.error("Error: ", error);
+    });
   }
 
   const handleDelete = () => {
-    console.log(id)
+    onDelete(id)
   }
 
   const handleQuantityChange = (e) => {

@@ -14,4 +14,12 @@ router.get("/:userid" , (req,res) => {
     Controller.cartController.getCartByUser(req,res)
 })
 
+router.delete("/delete/:id" , (req,res) => {
+    Controller.cartController.deleteCart(req,res)
+})
+
+router.put("/update/:id" , (req,res) => {
+    Controller.cartController.updateCart(req , res)
+})
+
 module.exports = router;

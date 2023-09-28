@@ -51,4 +51,19 @@ const getCartByUser = (req,res) => {
     })
 }
 
-module.exports = {getAllCart , addToCart , getCartByUser}
+const deleteCart = (req,res) => {
+    const cartid = req.params.id;
+    Model.Cart.destroy({where:{id : cartid}})
+    .then(response => res.status(200).send({result:200 , data:response}))
+    .catch(error => res.status(500).send({result:500 , data:error}))
+}
+
+const updateCart = (req,res) => {
+    const cartid = req.params.id;
+    const cartData = req.body;
+    Model.Cart.update(cartData , {where: {id : cartid}})
+    .then(response => res.status(200).send({result:200 , data:response}))
+    .catch(error => res.status(500).send({result:500 , data:error}))
+}
+
+module.exports = {getAllCart , addToCart , getCartByUser , deleteCart , updateCart}

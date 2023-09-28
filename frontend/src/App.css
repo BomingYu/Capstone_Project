@@ -287,7 +287,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5px;
-
+}
+.cartPageDropdowns{
+  display: flex;
+  gap: 25px;
 }
 #componentBtn{
   color: black;
