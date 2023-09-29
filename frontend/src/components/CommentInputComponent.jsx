@@ -7,32 +7,6 @@ import AlertMessage from "./AlertComponent";
 import { useState } from "react";
 import axios from "axios";
 
-const setRate = (rateValue) => {
-  console.log(userid);
-    console.log(productid);
-
-    const rateData = {
-      userid:userid,
-      productid:productid,
-      rate: rateValue
-    };
-
-    console.log(rateData);
-    axios.post("http://localhost:8080/rates/setRate" , rateData)
-    .then((resposne) => {
-      console.log(resposne)
-      setRateAlertVariant("primary")
-      setShowRateAlert(true)
-    })
-    .catch((error) => {
-       if (error.response) {
-        console.error("Axios error:", error.message);
-      } else {
-        console.error("Network error:", error);
-      }
-    });
-}
-
 const CommentInputComponent = ({ userid, productid }) => {
   const [comment, clearComment] = useInputData("");
 
@@ -42,6 +16,32 @@ const CommentInputComponent = ({ userid, productid }) => {
 
   const [showRateAlert, setShowRateAlert] = useState(false);
   const [rateAlertVariant , setRateAlertVariant] = useState();
+
+  const setRate = (rateValue) => {
+    console.log(userid);
+      console.log(productid);
+  
+      const rateData = {
+        userid:userid,
+        productid:productid,
+        rate: rateValue
+      };
+  
+      console.log(rateData);
+      axios.post("http://localhost:8080/rates/setRate" , rateData)
+      .then((resposne) => {
+        console.log(resposne)
+        setRateAlertVariant("primary")
+        setShowRateAlert(true)
+      })
+      .catch((error) => {
+         if (error.response) {
+          console.error("Axios error:", error.message);
+        } else {
+          console.error("Network error:", error);
+        }
+      });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();

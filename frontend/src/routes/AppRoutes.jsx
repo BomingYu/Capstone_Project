@@ -7,7 +7,7 @@ import ProtectedRoute from "./ProtectedRoutes";
 import AddProductPage from "../pages/AddProductPage";
 import ProductPage, { AllProducts, ProductByCategory , ProductDetailPage} from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
-import OrderPage from "../pages/OrderPage";
+import OrderItemPage from "../pages/OrderItemPage";
 
 function AppRoutes(props){
     return(
@@ -22,7 +22,7 @@ function AppRoutes(props){
                 <Route path="byCategory/:category" element={<ProductByCategory />}/>
                 <Route path="byId/:id" element={<ProductDetailPage />}/>
             </Route>
-            <Route path="/order" element={<OrderPage />}/>
+            <Route path="/orderItems" element={<OrderItemPage />}/>
             <Route path="/carts" element={<ProtectedRoute><CartPage {...props} /></ProtectedRoute>} />
         </Routes>
     )

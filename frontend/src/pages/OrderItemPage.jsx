@@ -5,7 +5,7 @@ import axios from "axios";
 import OrderItemComponent from "../components/OrderItemComponent";
 import { useNavigate } from "react-router-dom";
 
-const OrderPage = () => {
+const OrderItemPage = () => {
   const { user } = useUserContext();
   const [cartProduct, setCartProduct] = useState([]);
   const navigate = useNavigate()
@@ -65,4 +65,4 @@ const OrderPage = () => {
   );
 };
 
-export default OrderPage;
+export default OrderItemPage;

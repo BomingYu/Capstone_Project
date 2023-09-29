@@ -54,7 +54,7 @@ function CartPage() {
   }, [state]);
 
   const handlePayBtn = () => {
-    navigate("/order")
+    navigate("/orderItems")
   };
 
   const handleDelete = (cartid) => {

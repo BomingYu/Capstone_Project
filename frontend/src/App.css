@@ -164,9 +164,10 @@ body {
   gap: 15px;
 }
 
-.loginForm , .signupForm , .userSettingForm , .addNewProductForm , .commentInputForm{
+.loginForm , .signupForm , .userSettingForm , .addNewProductForm , .commentInputForm , .orderForm{
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 20px;
@@ -277,11 +278,12 @@ body {
   border-radius: 5px;
   font-family: 'Saira', sans-serif;
 }
-.cartBtn , .cartChildDiv , .orderPageBtns{
+.cartBtn , .cartChildDiv , .orderPageBtns , .orderBtnDiv{
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .cartChildDiv{
   justify-content: flex-end;
 }
