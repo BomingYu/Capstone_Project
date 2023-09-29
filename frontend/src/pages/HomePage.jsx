@@ -1,4 +1,5 @@
-import CartComponent from "../components/CartComponent";
+import OrderComponent from "../components/OrderComponent";
+import OrderItemComponent from "../components/OrderItemComponent";
 import { useUserContext } from "../contexts/userContext";
 
 function HomePage() {
@@ -10,7 +11,7 @@ function HomePage() {
       ) : (
         <h1 className="pageTitle">Welcome!</h1>
       )}
-      <CartComponent />
+      <OrderComponent />
     </div>
   );
 }

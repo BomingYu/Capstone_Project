@@ -128,11 +128,12 @@ body {
 .addNewProductPage{
   margin-top: 150px;
 }
-.productPage , .cartPage{
+.productPage , .cartPage , .orderPage{
   font-family: 'Saira', sans-serif; 
   margin-top: 150px;
 }
-.cartPage{
+
+.cartPage , .orderPage{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -265,17 +266,18 @@ body {
 .quantityInput{
   width: 120px !important;
 }
-.cartDiv{
+.cartDiv , .orderItemDiv{
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 30px;
   justify-content: space-between;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.7);
   padding: 10px;
   border-radius: 5px;
+  font-family: 'Saira', sans-serif;
 }
-.cartBtn , .cartChildDiv{
+.cartBtn , .cartChildDiv , .orderPageBtns{
   display: flex;
   align-items: center;
   gap: 20px;
@@ -283,7 +285,7 @@ body {
 .cartChildDiv{
   justify-content: flex-end;
 }
-.cartList{
+.cartList , .orderListBody{
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -291,6 +293,20 @@ body {
 .cartPageDropdowns{
   display: flex;
   gap: 25px;
+}
+.rateDiv{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.custom-alert {
+  height: 24px !important;  
+}
+.totalDiv{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #123123;
 }
 #componentBtn{
   color: black;

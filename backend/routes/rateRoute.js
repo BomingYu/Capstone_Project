@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Controller = require("../controllers");
 
-router.post("/addRate" , (req,res) => {
-    Controller.rateController.addRate(req.body , res)
+router.post("/setRate" , (req,res) => {
+    console.log(req.body.rate)
+    Controller.rateController.setRate(req.body , res)
 })
 
 module.exports = router

@@ -327,8 +327,8 @@ export function ProductDetailPage() {
         up={getUpCount(product.rates)}
         down={getDownCount(product.rates)}
       />
-      <button onClick={handleTest}>test {id}</button>
-      <CommentInputComponent userid={1} productid={product.id} />
+
+      {user ? <CommentInputComponent userid={user.id} productid={product.id} /> : null}
 
         <div className="commentsDiv">
           {product.comments &&

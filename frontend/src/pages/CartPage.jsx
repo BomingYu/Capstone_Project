@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import { useNavigate } from "react-router-dom";
 
 const ascendingNameSort = (arr) => {
   const sortedOutput = [...arr].sort((a, b) => {
@@ -40,6 +41,7 @@ function CartPage() {
   const [cartProduct, setCartProduct] = useState([]);
   const [displayCart , setDisplayCart] = useState([])
   const [state, setState] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -52,7 +54,7 @@ function CartPage() {
   }, [state]);
 
   const handlePayBtn = () => {
-    console.log(cartProduct[0].product);
+    navigate("/order")
   };
 
   const handleDelete = (cartid) => {
@@ -82,19 +84,6 @@ function CartPage() {
     <div className="cartPage">
       <h1 className="pageTitle">My Cart</h1>
       <div className="cartPageDropdowns">
-        {/* <DropdownButton
-          id="dropdown-basic-button"
-          title="Category"
-          variant="secondary"
-        >
-          <Dropdown.Item>All</Dropdown.Item>
-          <Dropdown.Item>Fruit</Dropdown.Item>
-          <Dropdown.Item>Vegetable</Dropdown.Item>
-          <Dropdown.Item>Dairy</Dropdown.Item>
-          <Dropdown.Item>Seasoning</Dropdown.Item>
-          <Dropdown.Item>Drink</Dropdown.Item>
-          <Dropdown.Item>Misc</Dropdown.Item>
-        </DropdownButton> */}
         <DropdownButton
           id="dropdown-basic-button"
           title="Sort"
