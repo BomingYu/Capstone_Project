@@ -1,5 +1,4 @@
 import OrderComponent from "../components/OrderComponent";
-import OrderItemComponent from "../components/OrderItemComponent";
 import { useUserContext } from "../contexts/userContext";
 
 function HomePage() {

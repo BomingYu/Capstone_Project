@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import useInputData from "../hooks/useInputData";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/userContext";
+import CardPaymentComponent from "./CardPayMentComponent";
 import axios from "axios";
 
 const OrderComponent = () => {
@@ -27,10 +28,33 @@ const OrderComponent = () => {
     }
   }, []);
 
+  const calculateTotal = () => {
+    let total = 0;
+    if(orderItems){
+        for(let i=0 ; i<orderItems.length ; i++){
+            const subtotal = Number(orderItems[i].quantity) * Number(orderItems[i].product.price)
+            total = (Number(total) + Number(subtotal)).toFixed(2)
+        }
+    }
+    return total;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(orderItems)
+    if(user){
+      const orderData = {
+        userid : user.id,
+        recipient : recName.value,
+        phone : phone.value,
+        total : calculateTotal(),
+        delivery : isChecked,
+        address : address.value,
+        status : "pending",
+        payment : payment
+      }
+      console.log(orderData);
+    }
   }
   const handleCheckBox = () => {
     setIsChecked(!isChecked);
@@ -76,6 +100,7 @@ const OrderComponent = () => {
         <option>Cash</option>
         <option>Card</option>
       </Form.Select>
+      {payment =="Card" ? <CardPaymentComponent /> : null}
       <div className="orderBtnDiv">
         <Button variant="secondary" onClick={handleBackButton}>Back</Button>
         <Button variant="light" type="submit">Submit</Button>

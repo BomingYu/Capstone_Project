@@ -22,13 +22,16 @@ const OrderItemPage = () => {
   const handleBackToCart = () => {
     navigate("/carts")
   }
+  const handleConfirm = () => {
+    navigate("/billForm")
+  }
 
   const calculateTotal = () => {
     let total = 0;
     if(cartProduct){
         for(let i=0 ; i<cartProduct.length ; i++){
             const subtotal = Number(cartProduct[i].quantity) * Number(cartProduct[i].product.price)
-            total = Number(total) + Number(subtotal)
+            total = (Number(total) + Number(subtotal)).toFixed(2)
         }
     }
     return total;
@@ -36,7 +39,7 @@ const OrderItemPage = () => {
 
   return (
     <div className="orderPage">
-      <h1 className="pageTitle">Order</h1>
+      <h1 className="pageTitle">Your Order Detail</h1>
       <div className="orderListBody">
         {cartProduct.map((item) => {
           const name = item.product.name;
@@ -59,7 +62,7 @@ const OrderItemPage = () => {
       <div className="totalDiv"> <h4>Total: $ {calculateTotal()}</h4></div>
       <div className="orderPageBtns">
         <Button variant="secondary" onClick={handleBackToCart}>Back</Button>
-        <Button variant="light">Confirm</Button>
+        <Button variant="light" onClick={handleConfirm}>Confirm</Button>
       </div>
     </div>
   );

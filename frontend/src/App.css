@@ -164,7 +164,7 @@ body {
   gap: 15px;
 }
 
-.loginForm , .signupForm , .userSettingForm , .addNewProductForm , .commentInputForm , .orderForm{
+.loginForm , .signupForm , .userSettingForm , .addNewProductForm , .commentInputForm , .orderForm , .cardPaymenyForm{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
