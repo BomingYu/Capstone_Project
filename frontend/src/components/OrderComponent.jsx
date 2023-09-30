@@ -1,24 +1,25 @@
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import useInputData from "../hooks/useInputData";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/userContext";
-import CardPaymentComponent from "./CardPayMentComponent";
 import axios from "axios";
+import CardPaymentComponent from "./CardPayMentComponent";
 
 const OrderComponent = () => {
   const navigate = useNavigate();
-  const {user} = useUserContext();
+  const { user } = useUserContext();
 
-  const [recName , clearRecName] = useInputData("")
-  const [phone , clearPhone] = useInputData("")
+  const [recName, clearRecName] = useInputData("");
+  const [phone, clearPhone] = useInputData("");
   const [isChecked, setIsChecked] = useState(true);
-  const [address , clearAddress] = useInputData("")
+  const [address, clearAddress] = useInputData("");
   const [payment, setPayment] = useState("");
+  const [cardNum , setCardNum] = useInputData("");
 
-  const [orderItems , setOrderItems] = useState([])
-  
+  const [orderItems, setOrderItems] = useState([]);
+
   useEffect(() => {
     if (user) {
       axios.get("http://localhost:8080/carts/" + user.id).then((response) => {
@@ -30,32 +31,33 @@ const OrderComponent = () => {
 
   const calculateTotal = () => {
     let total = 0;
-    if(orderItems){
-        for(let i=0 ; i<orderItems.length ; i++){
-            const subtotal = Number(orderItems[i].quantity) * Number(orderItems[i].product.price)
-            total = (Number(total) + Number(subtotal)).toFixed(2)
-        }
+    if (orderItems) {
+      for (let i = 0; i < orderItems.length; i++) {
+        const subtotal =
+          Number(orderItems[i].quantity) * Number(orderItems[i].product.price);
+        total = (Number(total) + Number(subtotal)).toFixed(2);
+      }
     }
     return total;
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(orderItems)
-    if(user){
+    console.log(orderItems);
+    if (user) {
       const orderData = {
-        userid : user.id,
-        recipient : recName.value,
-        phone : phone.value,
-        total : calculateTotal(),
-        delivery : isChecked,
-        address : address.value,
-        status : "pending",
-        payment : payment
-      }
+        userid: user.id,
+        recipient: recName.value,
+        phone: phone.value,
+        total: calculateTotal(),
+        delivery: isChecked,
+        address: address.value,
+        orderstatus: "pending",
+        payment: payment,
+      };
       console.log(orderData);
     }
-  }
+  };
   const handleCheckBox = () => {
     setIsChecked(!isChecked);
   };
@@ -64,14 +66,12 @@ const OrderComponent = () => {
     setPayment(e.target.value);
   };
 
-  const handleBackButton = () => [
-    navigate("/orderItems")
-  ]
+  const handleBackButton = () => [navigate("/orderItems")];
 
   return (
     <Form className="orderForm" onSubmit={handleSubmit}>
-      <Form.Control type="text" placeholder="Recipient Name" {...recName}/>
-      <Form.Control type="text" placeholder="Phone" {...phone}/>
+      <Form.Control type="text" placeholder="Recipient Name" {...recName} />
+      <Form.Control type="text" placeholder="Phone" {...phone} />
       <div>
         <Form.Check
           type="checkbox"
@@ -87,7 +87,12 @@ const OrderComponent = () => {
         </span>
       </div>
 
-      <Form.Control type="text" placeholder="Address" disabled={!isChecked} {...address}/>
+      <Form.Control
+        type="text"
+        placeholder="Address"
+        disabled={!isChecked}
+        {...address}
+      />
 
       <Form.Select
         className="componnetText"
@@ -100,10 +105,18 @@ const OrderComponent = () => {
         <option>Cash</option>
         <option>Card</option>
       </Form.Select>
-      {payment =="Card" ? <CardPaymentComponent /> : null}
+      {payment == "Card" ? <CardPaymentComponent/> : null}
       <div className="orderBtnDiv">
-        <Button variant="secondary" onClick={handleBackButton}>Back</Button>
-        <Button variant="light" type="submit">Submit</Button>
+        <Button
+          variant="secondary"
+          onClick={handleBackButton}
+          id="componentBtn"
+        >
+          Back
+        </Button>
+        <Button variant="light" type="submit" id="componentBtn">
+          Submit
+        </Button>
       </div>
     </Form>
   );

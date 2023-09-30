@@ -16,7 +16,7 @@ Product.init({
         type:DataTypes.STRING,
         allowNull : false,
         unique :true,
-        require : true
+        required : true
     },
     barcode:{
         type : DataTypes.STRING,

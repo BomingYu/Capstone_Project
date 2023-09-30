@@ -3,5 +3,7 @@ module.exports = {
     productController : require("./productController"),
     rateController : require("./rateController"),
     commentController : require("./commentController"),
-    cartController : require("./cartController")
+    cartController : require("./cartController"),
+    orderController : require("./orderController"),
+    orderItemController : require("./orderItemController")
 }

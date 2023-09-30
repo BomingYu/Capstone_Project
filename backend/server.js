@@ -7,6 +7,8 @@ const productRoute = require("./routes/productRoute")
 const rateRoute = require("./routes/rateRoute")
 const commentRoute = require("./routes/commentRoute")
 const cartRoute = require("./routes/cartRoute")
+const orderRoute = require("./routes/orderRoute")
+const orderItemRoute = require("./routes/orderItemRoute")
 
 const app = express();
 app.use(express.json());
@@ -29,6 +31,8 @@ app.use("/products" , productRoute);
 app.use("/rates" , rateRoute);
 app.use("/comments" , commentRoute);
 app.use("/carts" , cartRoute);
+app.use("/orders" , orderRoute);
+app.use("/orderItems" , orderItemRoute);
 
 
 app.listen(PORT, () => {

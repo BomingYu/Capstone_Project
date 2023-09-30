@@ -18,6 +18,10 @@ router.delete("/delete/:id" , (req,res) => {
     Controller.cartController.deleteCart(req,res)
 })
 
+router.delete("/deleteCartByUser/:userid" , (req,res) => {
+    Controller.cartController.deleteCartByUser(req,res)
+})
+
 router.put("/update/:id" , (req,res) => {
     Controller.cartController.updateCart(req , res)
 })
