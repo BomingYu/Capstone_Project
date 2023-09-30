@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/userContext";
 import axios from "axios";
 import CardPaymentComponent from "./CardPayMentComponent";
+import AlertMessage from "./AlertComponent";
 
 const OrderComponent = () => {
   const navigate = useNavigate();
@@ -16,9 +17,12 @@ const OrderComponent = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [address, clearAddress] = useInputData("");
   const [payment, setPayment] = useState("");
-  const [cardNum , setCardNum] = useInputData("");
+  const [cardNum, setCardNum] = useInputData("");
 
   const [orderItems, setOrderItems] = useState([]);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertHeading, setAlertHeading] = useState("test");
 
   useEffect(() => {
     if (user) {
@@ -44,18 +48,60 @@ const OrderComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(orderItems);
+    let orderData;
     if (user) {
-      const orderData = {
-        userid: user.id,
-        recipient: recName.value,
-        phone: phone.value,
-        total: calculateTotal(),
-        delivery: isChecked,
-        address: address.value,
-        orderstatus: "pending",
-        payment: payment,
-      };
-      console.log(orderData);
+      if (isChecked) {
+        console.log("ischecked is true");
+        if (
+          recName.value !== "" ||
+          phone.value !== "" ||
+          address.value !== "" ||
+          payment !== ""
+        ) {
+          orderData = {
+            userid: user.id,
+            recipient: recName.value,
+            phone: phone.value,
+            total: calculateTotal(),
+            delivery: isChecked,
+            address: address.value,
+            orderstatus: "pending",
+            payment: payment,
+          };
+        }
+        else{
+          setShowAlert(true);
+          setAlertHeading("Please fill in all input boxes!")
+        }
+      }
+      if(!isChecked){
+        console.log("ischecked is false");
+        if (
+          recName.value !== "" ||
+          phone.value !== "" ||
+          payment !== ""
+        ) {
+          orderData = {
+            userid: user.id,
+            recipient: recName.value,
+            phone: phone.value,
+            total: calculateTotal(),
+            delivery: isChecked,
+            orderstatus: "pending",
+            payment: payment,
+          };
+        }
+        else{
+          setShowAlert(true);
+          setAlertHeading("Please fill in all input boxes!")
+        }
+      }
+      if(orderData){
+        console.log(orderData);
+      }
+      else{
+        console.log("No data orderData");
+      }
     }
   };
   const handleCheckBox = () => {
@@ -105,7 +151,14 @@ const OrderComponent = () => {
         <option>Cash</option>
         <option>Card</option>
       </Form.Select>
-      {payment == "Card" ? <CardPaymentComponent/> : null}
+      {payment == "Card" ? <CardPaymentComponent /> : null}
+      <AlertMessage
+        show={showAlert}
+        onClose={() => setShowAlert(false)}
+        variant="danger"
+        heading={alertHeading}
+        className="danger"
+      />
       <div className="orderBtnDiv">
         <Button
           variant="secondary"
