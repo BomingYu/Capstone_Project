@@ -17,7 +17,6 @@ const OrderComponent = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [address, clearAddress] = useInputData("");
   const [payment, setPayment] = useState("");
-  const [cardNum, setCardNum] = useInputData("");
 
   const [orderItems, setOrderItems] = useState([]);
 
