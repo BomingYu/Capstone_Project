@@ -4,7 +4,7 @@ const OrderItemComponent = ({name , price , unit, quantity , subtotal}) => {
             <h5>{name}</h5>
             <h5>$ {price} / {unit}</h5>
             <h5>{quantity}</h5>
-            <h5>{subtotal}</h5>
+            <h5>$ {subtotal}</h5>
         </div>
     )
 }

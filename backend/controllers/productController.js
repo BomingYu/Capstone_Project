@@ -87,4 +87,19 @@ const getProductById = (req,res) => {
     })
 }
 
-module.exports = {getAllProducts , addNewProduct , getProductsByCategory , getProductWithRate , getProductById}
+const updateProduct = (req , res) => {
+    const productid = req.params.id;
+    const updateData = req.body;
+    Model.Product.update(updateData , {where:{id:productid}})
+    .then(response => {
+        console.log(response);
+        res.status(200).json({result:200 , data:response})
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send({result:500, data:error})
+    })
+
+}
+
+module.exports = {getAllProducts , addNewProduct , getProductsByCategory , getProductWithRate , getProductById , updateProduct}

@@ -46,63 +46,75 @@ const OrderComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(orderItems);
+    //console.log(orderItems);
     let orderData;
-    if (user) {
-      if (isChecked) {
-        console.log("ischecked is true");
-        if (
-          recName.value !== "" ||
-          phone.value !== "" ||
-          address.value !== "" ||
-          payment !== ""
-        ) {
-          orderData = {
-            userid: user.id,
-            recipient: recName.value,
-            phone: phone.value,
-            total: calculateTotal(),
-            delivery: isChecked,
-            address: address.value,
-            orderstatus: "pending",
-            payment: payment,
-          };
+    if(user){
+      if(recName.value!==""||phone.value!==""||payment!==""){
+        orderData={
+          userid : user.id,
+          recipient : recName.value,
+          phone : phone.value,
+          delivery : isChecked,
+          address : address.value,
+          total : calculateTotal(),
+          payment : payment
         }
-        else{
-          setShowAlert(true);
-          setAlertHeading("Please fill in all input boxes!")
+        if(!orderData.delivery){
+          orderData.address = null;
         }
-      }
-      if(!isChecked){
-        console.log("ischecked is false");
-        if (
-          recName.value !== "" ||
-          phone.value !== "" ||
-          payment !== ""
-        ) {
-          orderData = {
-            userid: user.id,
-            recipient: recName.value,
-            phone: phone.value,
-            total: calculateTotal(),
-            delivery: isChecked,
-            orderstatus: "pending",
-            payment: payment,
-          };
-        }
-        else{
-          setShowAlert(true);
-          setAlertHeading("Please fill in all input boxes!")
-        }
-      }
-      if(orderData){
-        console.log(orderData);
       }
       else{
-        console.log("No data orderData");
+        setShowAlert(true);
+        setAlertHeading("All Order Input are Required!")
       }
     }
+    if(orderData){
+      //console.log(orderData)
+      axios.post("http://localhost:8080/orders/" , orderData)
+      .then(response => {
+        const orderid = response.data.data.id
+        console.log(response.data.data);
+        const newOrderItems = orderItems.map(item => ({
+          orderid : orderid,
+          productid : item.product.id,
+          quantity : item.quantity,
+          price : item.product.price,
+          subtotal : (Number(item.product.price) * Number(item.quantity)).toFixed(2)
+        }))
+        console.log(newOrderItems)
+        return axios.post("http://localhost:8080/orderItems/addItemsOnce" , newOrderItems)
+      })
+      .then(response => {
+         const orderItemsResponse = response.data.data
+         console.log("lastResponse:" , orderItemsResponse)
+         console.log(orderItems)
+
+        const productStockRequests = []
+        orderItems.forEach(item => {
+          const apiUrl = "http://localhost:8080/products/update/"+item.productid;
+          const newStock = (Number(item.product.stock)-Number(item.quantity)).toFixed(2)
+          productStockRequests.push(axios.put(apiUrl , {stock:newStock}))
+        })
+        return Promise.all(productStockRequests)
+      })
+      .then(response => {
+        axios.delete("http://localhost:8080/carts/deleteCartByUser/"+user.id)
+      })
+      .then(()=>{
+        navigate("/orderdone")
+      })
+      .catch((error) => {
+        if (error.response) {
+          // setAlertVariant("danger");
+          // setAlertHeading(error);
+          // setShowAlert(true);
+          console.log(error)
+        }
+      });
+    }
   };
+
+
   const handleCheckBox = () => {
     setIsChecked(!isChecked);
   };

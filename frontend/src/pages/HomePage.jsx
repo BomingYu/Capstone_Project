@@ -10,7 +10,6 @@ function HomePage() {
       ) : (
         <h1 className="pageTitle">Welcome!</h1>
       )}
-      <OrderComponent />
     </div>
   );
 }

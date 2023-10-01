@@ -9,6 +9,7 @@ import ProductPage, { AllProducts, ProductByCategory , ProductDetailPage} from "
 import CartPage from "../pages/CartPage";
 import OrderItemPage from "../pages/OrderItemPage";
 import OrderPage from "../pages/OrderPage";
+import OrderSuccessfullPage from "../pages/OrderSuccessfullPage";
 
 function AppRoutes(props){
     return(
@@ -26,6 +27,7 @@ function AppRoutes(props){
             <Route path="/orderItems" element={<OrderItemPage />}/>
             <Route path="/carts" element={<ProtectedRoute><CartPage {...props} /></ProtectedRoute>} />
             <Route path="/billForm" element={<OrderPage {...props} />}/>
+            <Route path="/orderdone" element={<OrderSuccessfullPage {...props}/>}/>
         </Routes>
     )
 }

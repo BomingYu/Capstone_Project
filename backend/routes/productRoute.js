@@ -23,4 +23,8 @@ router.get("/byId/:id" , (req,res) => {
     Controller.productController.getProductById(req,res)
 })
 
+router.put("/update/:id" , (req,res) => {
+    Controller.productController.updateProduct(req , res)
+})
+
 module.exports = router;
