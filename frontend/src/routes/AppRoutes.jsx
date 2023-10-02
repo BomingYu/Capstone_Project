@@ -10,6 +10,9 @@ import CartPage from "../pages/CartPage";
 import OrderItemPage from "../pages/OrderItemPage";
 import OrderPage from "../pages/OrderPage";
 import OrderSuccessfullPage from "../pages/OrderSuccessfullPage";
+import CustomerOrdersPage from "../pages/CutomerOrdersPage"
+import CustomerOrderItemPage from "../pages/CustomerOrderItemPage";
+import UpdateSuccessfulPage from "../pages/UpdateSuccessfulPage";
 
 function AppRoutes(props){
     return(
@@ -28,6 +31,9 @@ function AppRoutes(props){
             <Route path="/carts" element={<ProtectedRoute><CartPage {...props} /></ProtectedRoute>} />
             <Route path="/billForm" element={<OrderPage {...props} />}/>
             <Route path="/orderdone" element={<OrderSuccessfullPage {...props}/>}/>
+            <Route path="/orderupdatedone" element={<UpdateSuccessfulPage {...props} />}/>
+            <Route path="/myorders/:userid" element={<ProtectedRoute><CustomerOrdersPage {...props} /></ProtectedRoute>}/>
+            <Route path="/myOrderDtail/:orderid" element = {<ProtectedRoute><CustomerOrderItemPage {...props}/></ProtectedRoute>}/>
         </Routes>
     )
 }

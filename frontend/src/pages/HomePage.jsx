@@ -1,4 +1,4 @@
-import OrderComponent from "../components/OrderComponent";
+import CustomerOrderEditComponent from "../components/CustomerOrderEditComponent";
 import { useUserContext } from "../contexts/userContext";
 
 function HomePage() {
@@ -10,6 +10,7 @@ function HomePage() {
       ) : (
         <h1 className="pageTitle">Welcome!</h1>
       )}
+      <CustomerOrderEditComponent />
     </div>
   );
 }

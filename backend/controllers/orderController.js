@@ -1,4 +1,5 @@
 const Model = require("../models")
+const { Op } = require("sequelize");
 
 const getAllOrders = (req,res) => {
     Model.Order.findAll({})
@@ -18,6 +19,29 @@ const getOrdersByUser = (req,res) => {
     .then(response => res.status(200).json({result:200 , data:response}))
     .catch(error => res.status(500).send({result:500 , data:error}))
 }
+
+const getOrderByOrderid = (req,res) => {
+    const id = req.params.id;
+    Model.Order.findByPk(id,{
+        include:[{model:Model.OrderItem}]
+    })
+    .then(response => res.status(200).json({result:200 , data:response}))
+    .catch(error => res.status(500).send({result:500 , data:error}))
+}
+
+// const incompletedOrderByuser = (req,res) => {
+//     const userid = req.params.userid;
+//     Model.Order.findAll({
+//         where:{
+//             id:userid,
+//             [Op.not]:[
+//                 {orderstatus:["Completed" , "Cancelled"]}
+//             ]
+//         }
+//     })
+//     .then(response => res.status(200).json({result:200 , data:response}))
+//     .catch(error => res.status(500).send({result:500 , data:error}))
+// }
 
 const updateOrder = (req,res) => {
     const id = req.params.id;
@@ -55,4 +79,4 @@ const setOrderCandelled = (req,res) => {
     .catch(error => res.status(500).send({result:500 , data:error}))
 }
 
-module.exports={getAllOrders , createOrder , getOrdersByUser , updateOrder , setOrderProcessing , setOrderShipping , setOrderCompleted , setOrderCandelled}
+module.exports={getAllOrders , createOrder , getOrdersByUser , updateOrder , setOrderProcessing , setOrderShipping , setOrderCompleted , setOrderCandelled , getOrderByOrderid}

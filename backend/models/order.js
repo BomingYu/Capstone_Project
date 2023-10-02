@@ -1,5 +1,6 @@
 const {DataTypes , Model} = require("sequelize");
 const dbConnect = require("../dbConnect");
+const OrderItem = require("./orderItem");
 const sequelizeInstance = dbConnect.Sequelize;
 
 class Order extends Model {}
@@ -54,5 +55,7 @@ Order.init({
     timestamps:true,
     freezeTableName:true
 })
+
+Order.hasMany(OrderItem , {foreignKey:"orderid"})
 
 module.exports=Order

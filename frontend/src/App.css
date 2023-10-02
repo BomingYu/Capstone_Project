@@ -271,7 +271,7 @@ body {
 .quantityInput{
   width: 120px !important;
 }
-.cartDiv , .orderItemDiv{
+.cartDiv , .orderItemDiv , .orderCardDiv{
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -282,6 +282,9 @@ body {
   border-radius: 5px;
   font-family: 'Saira', sans-serif;
 }
+.orderCardDiv:hover{
+  border: solid 5px rgb(55, 67, 0);
+}
 .cartBtn , .cartChildDiv , .orderPageBtns , .orderBtnDiv{
   display: flex;
   align-items: center;
@@ -291,9 +294,11 @@ body {
 .cartChildDiv{
   justify-content: flex-end;
 }
-.cartList , .orderListBody{
+.cartList , .orderListBody , .orderList{
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 5px;
 }
 .cartPageDropdowns{
@@ -313,6 +318,41 @@ body {
   justify-content: flex-end;
   align-items: center;
   color: #123123;
+}
+.checkDIV{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: baseline;
+}
+.orderViewHead{
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+.orderViewBodyDiv{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  padding: 5px;
+}
+.orderViewItem , .firstOrderViewItem , .lastOrderViewItem{
+  display: flex;
+  flex-direction: column;
+  border-left: #123123 2px solid;
+  border-right: #123123 2px solid;
+  margin-left: -1px;
+  padding: 5px;
+}
+.firstOrderViewItem{
+  border-left: none;
+  margin-left: 0;
+}
+.lastOrderViewItem{
+  border-right: none;
+  margin-left: 0;
 }
 #componentBtn{
   font-size: 20px;

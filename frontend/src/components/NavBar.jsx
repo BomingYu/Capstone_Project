@@ -64,6 +64,8 @@ function NavBar() {
               </NavLink>
             )}
 
+            {user? <NavLink className="navBarText" to={"/myorders/"+user.id}>My Orders</NavLink>:null}
+
             <NavDropdown title="Admin" className="navBarText">
               <NavLink
                 className="navBarText navDropdownItem"

@@ -14,6 +14,14 @@ router.get("/orderByUser/:userid" , (req,res) => {
     Controller.orderController.getOrdersByUser(req,res)
 })
 
+router.get("/orderByorderid/:id" , (req,res) => {
+    Controller.orderController.getOrderByOrderid(req,res)
+})
+
+router.get("/incompletedOrderByuser/:userid" , (req,res) => {
+    Controller.orderController.incompletedOrderByuser(req,res)
+})
+
 router.put("/update/:id" , (req,res) => {
     Controller.orderController.updateOrder(req,res)
 })

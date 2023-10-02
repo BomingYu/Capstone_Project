@@ -129,7 +129,7 @@ const OrderComponent = () => {
     <Form className="orderForm" onSubmit={handleSubmit}>
       <Form.Control type="text" placeholder="Recipient Name" {...recName} />
       <Form.Control type="text" placeholder="Phone" {...phone} />
-      <div>
+      <div className="checkDIV">
         <Form.Check
           type="checkbox"
           id="custom-switch"
