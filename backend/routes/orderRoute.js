@@ -26,6 +26,10 @@ router.put("/update/:id" , (req,res) => {
     Controller.orderController.updateOrder(req,res)
 })
 
+router.put("/setOrderPending/:id" , (req,res) => {
+    Controller.orderController.setOrderPending(req,res)
+})
+
 router.put("/setOrderProcessing/:id" , (req,res) => {
     Controller.orderController.setOrderProcessing(req,res)
 })

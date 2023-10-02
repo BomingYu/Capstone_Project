@@ -51,6 +51,13 @@ const updateOrder = (req,res) => {
     .catch(error => res.status(500).send({result:500 , data:error}))
 }
 
+const setOrderPending = (req,res) => {
+    const id = req.params.id;
+    Model.Order.update({orderstatus:"Pending"} , {where:{id:id}})
+    .then(response => res.status(200).json({result:200 , data:response}))
+    .catch(error => res.status(500).send({result:500 , data:error}))
+}
+
 const setOrderProcessing = (req,res) => {
     const id = req.params.id;
     Model.Order.update({orderstatus:"Processing"} , {where:{id:id}})
@@ -79,4 +86,4 @@ const setOrderCandelled = (req,res) => {
     .catch(error => res.status(500).send({result:500 , data:error}))
 }
 
-module.exports={getAllOrders , createOrder , getOrdersByUser , updateOrder , setOrderProcessing , setOrderShipping , setOrderCompleted , setOrderCandelled , getOrderByOrderid}
+module.exports={getAllOrders , createOrder , getOrdersByUser , updateOrder , setOrderPending , setOrderProcessing , setOrderShipping , setOrderCompleted , setOrderCandelled , getOrderByOrderid}

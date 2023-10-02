@@ -72,6 +72,12 @@ function NavBar() {
                 to={"/adminProduct/add"}
               >
                 New Product
+              </NavLink><br/>
+              <NavLink
+                className="navBarText navDropdownItem"
+                to={"/adminOrders"}
+              >
+                Admin Orders
               </NavLink>
             </NavDropdown>
             

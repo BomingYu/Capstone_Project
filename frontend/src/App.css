@@ -129,7 +129,7 @@ body {
 .addNewProductPage{
   margin-top: 150px;
 }
-.productPage , .cartPage , .orderPage{
+.productPage , .cartPage , .orderPage ,.adminOrderPage{
   font-family: 'Saira', sans-serif; 
   margin-top: 150px;
 }
