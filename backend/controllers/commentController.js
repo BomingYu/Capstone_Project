@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const Model = require("../models")
 
 const getAllComments = (req,res) => {
@@ -22,4 +23,17 @@ const addComent = (data , res) => {
       })      
 }
 
-module.exports = {getAllComments , addComent}
+const deleteComment = (req,res) => {
+    const commentid = req.params.id;
+    Model.Comment.destroy({where:{id:commentid}})
+    .then(response => {
+        console.log(response);
+        res.status(200).json({result:200 , data:response})
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send({result:500, data:error})
+    })
+}
+
+module.exports = {getAllComments , addComent , deleteComment}

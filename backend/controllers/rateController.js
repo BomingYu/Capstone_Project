@@ -25,4 +25,36 @@ const setRate = (data , res) => {
     });
 }
 
-module.exports = {setRate};
+const resetProductLike = (req,res) => {
+    const productid = req.params.productid
+    Model.Rate.destroy({where:{
+        productid:productid,
+        rate : "up"
+    }})
+    .then(response => {
+        console.log(response);
+        res.status(200).json({result:200 , data:response})
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send({result:500, data:error})
+    })
+}
+
+const resetProductUnlike = (req , res) => {
+    const productid = req.params.productid
+    Model.Rate.destroy({where:{
+        productid:productid,
+        rate : "down"
+    }})
+    .then(response => {
+        console.log(response);
+        res.status(200).json({result:200 , data:response})
+    })
+    .catch(error => {
+        console.error(error);
+        res.status(500).send({result:500, data:error})
+    })
+}
+
+module.exports = {setRate , resetProductLike , resetProductUnlike};

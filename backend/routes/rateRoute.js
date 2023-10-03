@@ -7,4 +7,12 @@ router.post("/setRate" , (req,res) => {
     Controller.rateController.setRate(req.body , res)
 })
 
+router.delete("/resetLike/:productid" , (req,res) => {
+    Controller.rateController.resetProductLike(req,res)
+})
+
+router.delete("/resetUnlike/:productid" , (req,res) => {
+    Controller.rateController.resetProductUnlike(req,res)
+})
+
 module.exports = router

@@ -14,6 +14,7 @@ import CustomerOrdersPage from "../pages/CutomerOrdersPage"
 import CustomerOrderItemPage from "../pages/CustomerOrderItemPage";
 import UpdateSuccessfulPage from "../pages/UpdateSuccessfulPage";
 import AdminOrderPage, { AdminOrderDetailPage, AdminOrderMainPage } from "../pages/AdminOrderPage";
+import AdminProductPage, { AdminProductDetail, AdminProductList } from "../pages/AdminProductPage";
 
 function AppRoutes(props){
     return(
@@ -38,6 +39,10 @@ function AppRoutes(props){
             <Route path="/adminOrders" element={<ProtectedRoute><AdminOrderPage {...props}/></ProtectedRoute>}>
                 <Route index element={<AdminOrderMainPage/>}/>
                 <Route path="orderId/:orderid" element={<AdminOrderDetailPage/>}/>
+            </Route>
+            <Route path="/adminProducts" element={<AdminProductPage {...props}/>}>
+                <Route index element={<AdminProductList />}/>
+                <Route path=":productid" element={<AdminProductDetail />}/>
             </Route>
         </Routes>
     )

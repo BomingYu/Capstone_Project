@@ -271,7 +271,7 @@ body {
 .quantityInput{
   width: 120px !important;
 }
-.cartDiv , .orderItemDiv , .orderCardDiv{
+.cartDiv , .orderItemDiv , .orderCardDiv , .editProductCard{
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -353,6 +353,19 @@ body {
 .lastOrderViewItem{
   border-right: none;
   margin-left: 0;
+}
+.adminRateDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.avaText{
+  color: blue;
+}
+.unavaText{
+  color: red;
 }
 #componentBtn{
   font-size: 20px;

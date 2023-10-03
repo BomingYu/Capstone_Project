@@ -10,4 +10,8 @@ router.post("/addComment" , (req,res) => {
     Controller.commentController.addComent(req.body , res)
 })
 
+router.delete("/:id" , (req,res) => {
+    Controller.commentController.deleteComment(req,res)
+})
+
 module.exports = router;

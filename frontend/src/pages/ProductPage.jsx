@@ -335,6 +335,7 @@ export function ProductDetailPage() {
             product.comments.length > 0 &&
             product.comments.map((comment) => (
               <CommentComponent
+                id={comment.id}
                 key={comment.id}
                 time={comment.createdAt}
                 body={comment.body}
