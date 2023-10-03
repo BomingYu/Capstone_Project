@@ -52,6 +52,14 @@ const getProductsByCategory = (req, res) => {
   }).then((products) => res.status(200).send({ result: 200, data: products }));
 };
 
+const getProductsByAvailable = (req,res) => {
+  const available = req.params.available
+  Model.Product.findAll({
+    where: { available : available },
+    include: [{ model: Model.Rate }],
+  }).then((products) => res.status(200).send({ result: 200, data: products }));
+}
+
 const getProductWithRate = (req, res) => {
   Model.Product.findAll({
     include: [
@@ -134,5 +142,6 @@ module.exports = {
   getProductById,
   updateProduct,
   getAllAvailableProduct,
-  getAvailableProductByCategory
+  getAvailableProductByCategory,
+  getProductsByAvailable
 };

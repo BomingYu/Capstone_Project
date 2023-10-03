@@ -35,4 +35,8 @@ router.get("/getAvailableProductByCategory/:category" , (req,res) => [
     Controller.productController.getAvailableProductByCategory(req,res)
 ])
 
+router.get("/getProductsByAvailable/:available" , (req,res) => {
+    Controller.productController.getProductsByAvailable(req,res)
+})
+
 module.exports = router;

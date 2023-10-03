@@ -132,8 +132,15 @@ body {
 .productPage , .cartPage , .orderPage ,.adminOrderPage{
   font-family: 'Saira', sans-serif; 
   margin-top: 150px;
-}
 
+}
+.adminOrderPageBody{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 .cartPage , .orderPage{
   display: flex;
   flex-direction: column;
@@ -361,6 +368,12 @@ body {
   justify-content: center;
   align-items: center;
   gap: 5px;
+}
+.dropdownDiv{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 .avaText{
   color: blue;

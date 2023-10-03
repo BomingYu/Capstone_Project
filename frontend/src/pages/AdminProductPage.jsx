@@ -8,6 +8,7 @@ import CommentComponent from "../components/CommentComponent";
 import thumbUp from "../assets/icons/thumb-up.png";
 import thumpDown from "../assets/icons/thumb-down.png";
 import AlertMessage from "../components/AlertComponent";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function AdminProductPage() {
   return (
@@ -27,7 +28,70 @@ export function AdminProductList() {
     });
   }, []);
 
+  function handleDisplatCategory(categ){
+    axios.get("http://localhost:8080/products/byCategory/"+categ)
+    .then((response) => {
+      setProdsucts(response.data.data);
+    });
+  }
+
+  function handleDisplayAvailable(available){
+    axios.get("http://localhost:8080/products/getProductsByAvailable/"+available)
+    .then((response) => {
+      setProdsucts(response.data.data);
+    });
+  }
+
+  function handleDisplayAll(){
+    axios.get("http://localhost:8080/products/").then((response) => {
+      setProdsucts(response.data.data);
+    });
+  }
   return (
+    <div className="adminOrderPageBody">
+      <div className="dropdownDiv">
+        <Dropdown>
+          <Dropdown.Toggle variant="dark" id="dropdown-basic">
+            By Category
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={()=>handleDisplatCategory("fruit")}>
+              Fruit
+            </Dropdown.Item>
+            <Dropdown.Item onClick={()=>handleDisplatCategory("vegetable")}>
+              Vegetable
+            </Dropdown.Item>
+            <Dropdown.Item onClick={()=>handleDisplatCategory("dairy")}>
+              Dairy
+            </Dropdown.Item>
+            <Dropdown.Item onClick={()=>handleDisplatCategory("seasoning")}>
+              Seasoning
+            </Dropdown.Item>
+            <Dropdown.Item onClick={()=>handleDisplatCategory("drink")}>
+              Drink
+            </Dropdown.Item>
+            <Dropdown.Item onClick={()=>handleDisplatCategory("misc")}>
+              Misc
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="dark" id="dropdown-basic">
+            By Available
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={()=>handleDisplayAvailable(1)}>
+            Available
+            </Dropdown.Item>
+            <Dropdown.Item onClick={()=>handleDisplayAvailable(0)}>
+            Unavailable
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Button variant="dark" onClick={handleDisplayAll}>All</Button>
+      </div>
     <div className="cartList">
       {products.map((product) => (
         <EditProductCardComponent
@@ -41,6 +105,7 @@ export function AdminProductList() {
           avaliable={product.available}
         />
       ))}
+    </div>
     </div>
   );
 }
@@ -70,9 +135,6 @@ export function AdminProductDetail() {
 
   function handleEdit() {
     setEdit(true);
-  }
-  function handleTest() {
-    console.log(product.comments);
   }
 
   function handleResetLike(){
@@ -123,7 +185,6 @@ export function AdminProductDetail() {
       ) : (
         <p>Loading...</p>
       )}
-      <button onClick={handleTest}>test</button>
       <div className="adminRateDiv">
         <h5>Reset Ratings</h5>
         <div className="rateInput">

@@ -5,6 +5,7 @@ import AdminOrderCard from "../components/AdminOrderCart";
 import OrderItemComponent from "../components/OrderItemComponent";
 import Dropdown from "react-bootstrap/Dropdown";
 import AlertMessage from "../components/AlertComponent";
+import Button from 'react-bootstrap/Button';
 
 export default function AdminOrderPage() {
   return (
@@ -23,20 +24,115 @@ export function AdminOrderMainPage() {
       const reversedOrders = response.data.data.reverse();
       setOrders(reversedOrders);
     });
-  });
+  }, []);
+
+  function handleDisplayStatus(status) {
+    axios
+      .get("http://localhost:8080/orders/getOrderByState/" + status)
+      .then((response) => {
+        const reversedOrders = response.data.data.reverse();
+        setOrders(reversedOrders);
+      });
+  }
+
+  function handleDisplayPayment(payment) {
+    axios
+      .get("http://localhost:8080/orders/getOrderByPayment/" + payment)
+      .then((response) => {
+        const reversedOrders = response.data.data.reverse();
+        setOrders(reversedOrders);
+      });
+  }
+
+  function handleDisplayDeliver(deliver) {
+    axios
+      .get("http://localhost:8080/orders/getOrderByDeliver/" + deliver)
+      .then((response) => {
+        const reversedOrders = response.data.data.reverse();
+        setOrders(reversedOrders);
+      });
+  }
+
+  function handleDisplayAll(){
+    axios.get("http://localhost:8080/orders").then((response) => {
+      const reversedOrders = response.data.data.reverse();
+      setOrders(reversedOrders);
+    });
+  }
+
   return (
     <div className="orderListBody">
-      {orders.map((order) => (
-        <AdminOrderCard
-          key={order.id}
-          orderid={order.id}
-          recipient={order.recipient}
-          delivery={order.delivery}
-          payment={order.payment}
-          status={order.orderstatus}
-          upDate={order.updatedAt}
-        />
-      ))}
+      <div className="dropdownDiv">
+        <Dropdown>
+          <Dropdown.Toggle variant="dark" id="dropdown-basic">
+            By Status
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => handleDisplayStatus("pending")}>
+              Pending
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleDisplayStatus("processing")}>
+              Processing
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleDisplayStatus("shipping")}>
+              Shipping
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleDisplayStatus("completed")}>
+              Completed
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleDisplayStatus("cancelled")}>
+              Cancelled
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="dark" id="dropdown-basic">
+            By Payment
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => handleDisplayPayment("card")}>
+              Card
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleDisplayPayment("cash")}>
+              Cash
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="dark" id="dropdown-basic">
+            By Deliver
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => handleDisplayDeliver("1")}>
+              Delivery
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleDisplayDeliver("0")}>
+              Pick Up
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Button variant="dark" onClick={handleDisplayAll}>All</Button>
+      </div>
+      <div className="orderListBody">
+        {orders.length > 0 ? (
+          orders.map((order) => (
+            <AdminOrderCard
+              key={order.id}
+              orderid={order.id}
+              recipient={order.recipient}
+              delivery={order.delivery}
+              payment={order.payment}
+              status={order.orderstatus}
+              upDate={order.updatedAt}
+            />
+          ))
+        ) : (
+          <h2>There is no corresponding order</h2>
+        )}
+      </div>
     </div>
   );
 }
@@ -46,7 +142,7 @@ export function AdminOrderDetailPage() {
   const [orderdetail, setOrderDetail] = useState([]);
 
   const [showAlert, setShowAlert] = useState(false);
-  const [alertHeading , setAlertHeading] = useState();
+  const [alertHeading, setAlertHeading] = useState();
 
   useEffect(() => {
     axios
@@ -57,40 +153,45 @@ export function AdminOrderDetailPage() {
   });
 
   const handleChangeToPendingStatus = () => {
-    axios.put("http://localhost:8080/orders/setOrderPending/"+orderid)
-    .then(()=>{
+    axios
+      .put("http://localhost:8080/orders/setOrderPending/" + orderid)
+      .then(() => {
         setShowAlert(true);
-        setAlertHeading("The order status has been set to pending")
-    })
-  }
+        setAlertHeading("The order status has been set to pending");
+      });
+  };
   const handleChangeToProdessingStatus = () => {
-    axios.put("http://localhost:8080/orders/setOrderProcessing/"+orderid)
-    .then(()=>{
+    axios
+      .put("http://localhost:8080/orders/setOrderProcessing/" + orderid)
+      .then(() => {
         setShowAlert(true);
-        setAlertHeading("The order status has been set to processing")
-    })
-  }
+        setAlertHeading("The order status has been set to processing");
+      });
+  };
   const handleChangeToShippingStatus = () => {
-    axios.put("http://localhost:8080/orders/setOrderShipping/"+orderid)
-    .then(()=>{
+    axios
+      .put("http://localhost:8080/orders/setOrderShipping/" + orderid)
+      .then(() => {
         setShowAlert(true);
-        setAlertHeading("The order status has been set to shipping")
-    })
-  }
+        setAlertHeading("The order status has been set to shipping");
+      });
+  };
   const handleChangeToCompletedStatus = () => {
-    axios.put("http://localhost:8080/orders/setOrderCompleted/"+orderid)
-    .then(()=>{
+    axios
+      .put("http://localhost:8080/orders/setOrderCompleted/" + orderid)
+      .then(() => {
         setShowAlert(true);
-        setAlertHeading("The order status has been set to completed")
-    })
-  }
+        setAlertHeading("The order status has been set to completed");
+      });
+  };
   const handleChangeToCancelledStatus = () => {
-    axios.put("http://localhost:8080/orders/setOrderCancelled/"+orderid)
-    .then(()=>{
+    axios
+      .put("http://localhost:8080/orders/setOrderCancelled/" + orderid)
+      .then(() => {
         setShowAlert(true);
-        setAlertHeading("The order status has been set to cancelled")
-    })
-  }
+        setAlertHeading("The order status has been set to cancelled");
+      });
+  };
 
   return (
     <div className="orderListBody">
@@ -107,21 +208,31 @@ export function AdminOrderDetailPage() {
         />
       ))}
       <AlertMessage
-              show={showAlert}
-              onClose={() => setShowAlert(false)}
-              variant={"primary"}
-              heading={alertHeading}
-            ></AlertMessage>
+        show={showAlert}
+        onClose={() => setShowAlert(false)}
+        variant={"primary"}
+        heading={alertHeading}
+      ></AlertMessage>
       <Dropdown>
         <Dropdown.Toggle variant="dark" id="dropdown-basic">
           Change Order Status
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item onClick={handleChangeToPendingStatus}>Pending</Dropdown.Item>
-          <Dropdown.Item onClick={handleChangeToProdessingStatus}>Processing</Dropdown.Item>
-          <Dropdown.Item onClick={handleChangeToShippingStatus}>Shipping</Dropdown.Item>
-          <Dropdown.Item onClick={handleChangeToCompletedStatus}>Completed</Dropdown.Item>
-          <Dropdown.Item onClick={handleChangeToCancelledStatus}>Cancelled</Dropdown.Item>
+          <Dropdown.Item onClick={handleChangeToPendingStatus}>
+            Pending
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleChangeToProdessingStatus}>
+            Processing
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleChangeToShippingStatus}>
+            Shipping
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleChangeToCompletedStatus}>
+            Completed
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleChangeToCancelledStatus}>
+            Cancelled
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </div>
