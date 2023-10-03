@@ -23,15 +23,15 @@ function AppRoutes(props){
             <Route path="/login" element={<LoginPage {...props}/>}/>
             <Route path="/signup" element={<SignupPage {...props}/>}/>
             <Route path="/settingPassword" element={<ProtectedRoute><SettingPasswordPage {...props}/></ProtectedRoute>}/>
-            <Route path="/adminProduct/add" element={<AddProductPage {...props} />}/>
+            <Route path="/adminProduct/add" element={<ProtectedRoute><AddProductPage {...props} /></ProtectedRoute>}/>
             <Route path="/products" element={<ProductPage {...props} />}>
                 <Route index element={<AllProducts />}/>
                 <Route path="byCategory/:category" element={<ProductByCategory />}/>
                 <Route path="byId/:id" element={<ProductDetailPage />}/>
             </Route>
-            <Route path="/orderItems" element={<OrderItemPage />}/>
+            <Route path="/orderItems" element={<ProtectedRoute><OrderItemPage /></ProtectedRoute>}/>
             <Route path="/carts" element={<ProtectedRoute><CartPage {...props} /></ProtectedRoute>} />
-            <Route path="/billForm" element={<OrderPage {...props} />}/>
+            <Route path="/billForm" element={<ProtectedRoute><OrderPage {...props} /></ProtectedRoute>}/>
             <Route path="/orderdone" element={<OrderSuccessfullPage {...props}/>}/>
             <Route path="/orderupdatedone" element={<UpdateSuccessfulPage {...props} />}/>
             <Route path="/myorders/:userid" element={<ProtectedRoute><CustomerOrdersPage {...props} /></ProtectedRoute>}/>
@@ -40,7 +40,7 @@ function AppRoutes(props){
                 <Route index element={<AdminOrderMainPage/>}/>
                 <Route path="orderId/:orderid" element={<AdminOrderDetailPage/>}/>
             </Route>
-            <Route path="/adminProducts" element={<AdminProductPage {...props}/>}>
+            <Route path="/adminProducts" element={<ProtectedRoute><AdminProductPage {...props}/></ProtectedRoute>}>
                 <Route index element={<AdminProductList />}/>
                 <Route path=":productid" element={<AdminProductDetail />}/>
             </Route>

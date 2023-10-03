@@ -29,20 +29,6 @@ const getOrderByOrderid = (req,res) => {
     .catch(error => res.status(500).send({result:500 , data:error}))
 }
 
-// const incompletedOrderByuser = (req,res) => {
-//     const userid = req.params.userid;
-//     Model.Order.findAll({
-//         where:{
-//             id:userid,
-//             [Op.not]:[
-//                 {orderstatus:["Completed" , "Cancelled"]}
-//             ]
-//         }
-//     })
-//     .then(response => res.status(200).json({result:200 , data:response}))
-//     .catch(error => res.status(500).send({result:500 , data:error}))
-// }
-
 const updateOrder = (req,res) => {
     const id = req.params.id;
     const data = req.body;

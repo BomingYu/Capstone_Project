@@ -368,6 +368,27 @@ body {
 .unavaText{
   color: red;
 }
+.Pending{
+  color: goldenrod;
+}
+.Processing{
+  color: green;
+}
+.Shipping{
+  color: blue;
+}
+.Completed{
+  color: black;
+}
+.Cancelled{
+  color: red;
+}
+.delivery{
+  color: rgb(147, 95, 0);
+}
+.pickup{
+  color: rgb(130, 130, 130);
+}
 #componentBtn{
   font-size: 20px;
   font-family: 'Saira', sans-serif;

@@ -27,4 +27,12 @@ router.put("/update/:id" ,(req,res) => {
     Controller.productController.updateProduct(req , res)
 })
 
+router.get('/getAvailableOnly' , (req,res) => {
+    Controller.productController.getAllAvailableProduct(req,res)
+})
+
+router.get("/getAvailableProductByCategory/:category" , (req,res) => [
+    Controller.productController.getAvailableProductByCategory(req,res)
+])
+
 module.exports = router;

@@ -88,7 +88,7 @@ export function AllProducts() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/products")
+      .get("http://localhost:8080/products/getAvailableOnly")
       .then((response) => {
         setProducts(response.data.data);
         setDisplayProducts(response.data.data);
@@ -198,7 +198,7 @@ export function ProductByCategory() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/products/byCategory/" + category)
+      .get("http://localhost:8080/products/getAvailableProductByCategory/" + category)
       .then((response) => {
         setProducts(response.data.data);
         setDisplayProducts(response.data.data);
