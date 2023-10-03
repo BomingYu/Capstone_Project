@@ -44,29 +44,75 @@ const OrderComponent = () => {
     return total;
   };
 
+  const handleTest = () => {
+    const phoneNumberRegex = /^\d{7,15}$/;
+    console.log(phoneNumberRegex.test(phone.value))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     //console.log(orderItems);
+    const phoneNumberRegex = /^\d{7,15}$/;
     let orderData;
     if(user){
-      if(recName.value!==""||phone.value!==""||payment!==""){
-        orderData={
-          userid : user.id,
-          recipient : recName.value,
-          phone : phone.value,
-          delivery : isChecked,
-          address : address.value,
-          total : calculateTotal(),
-          payment : payment
+      if(isChecked){
+        if(recName.value!="" && phoneNumberRegex.test(phone.value) && address.value!="" && payment!=""){
+          orderData={
+            userid : user.id,
+            recipient : recName.value,
+            phone : phone.value,
+            delivery : isChecked,
+            address : address.value,
+            total : calculateTotal(),
+            payment : payment
+          }
         }
-        if(!orderData.delivery){
-          orderData.address = null;
+        else{
+          setShowAlert(true);
+          setAlertHeading("All Order Input are Required!")
+          return
         }
       }
       else{
-        setShowAlert(true);
-        setAlertHeading("All Order Input are Required!")
+        if(recName.value!==""&&phone.value!==""&&payment!==""){
+          orderData={
+            userid : user.id,
+            recipient : recName.value,
+            phone : phone.value,
+            delivery : isChecked,
+            address : address.value,
+            total : calculateTotal(),
+            payment : payment
+          }
+        }
+          else{
+            setShowAlert(true);
+            setAlertHeading("All Order Input are Required!")
+            return
+          }
       }
+      ///////////////////////////////////////////////////////////////////////////////
+      // if(recName.value!==""&&phone.value!==""&&payment!==""){
+      //   orderData={
+      //     userid : user.id,
+      //     recipient : recName.value,
+      //     phone : phone.value,
+      //     delivery : isChecked,
+      //     address : address.value,
+      //     total : calculateTotal(),
+      //     payment : payment
+      //   }
+      //   if(!orderData.delivery){
+      //     orderData.address = null;
+      //   }
+      // }
+      // else{
+      //   setShowAlert(true);
+      //   setAlertHeading("All Order Input are Required!")
+      // }
+    }
+    else{
+      return
     }
     if(orderData){
       //console.log(orderData)
@@ -181,6 +227,7 @@ const OrderComponent = () => {
         <Button variant="light" type="submit" id="componentBtn">
           Submit
         </Button>
+        <button onClick={handleTest}>test</button>
       </div>
     </Form>
   );

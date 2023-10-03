@@ -50,6 +50,7 @@ export function AdminProductDetail() {
   const [product, setProduct] = useState();
   const [edit, setEdit] = useState(false);
   const [changed, setChanged] = useState(false);
+  const [productComments , setComments] = useState()
 
   const [showAlert , setShowAlert] = useState(false)
   const [heading , setAlertHeading] = useState()
@@ -59,6 +60,7 @@ export function AdminProductDetail() {
       .get("http://localhost:8080/products/byId/" + productid)
       .then((response) => {
         setProduct(response.data.data);
+        setComments(response.data.data.comments.reverse())
       });
   }, [changed]);
 
@@ -142,7 +144,7 @@ export function AdminProductDetail() {
       </div>
       <div className="commentsDiv">
         {product && product.comments
-          ? product.comments.map((comment) => (
+          ? productComments.map((comment) => (
               <CommentComponent
                 id={comment.id}
                 key={comment.id}

@@ -20,7 +20,8 @@ export function AdminOrderMainPage() {
 
   useEffect(() => {
     axios.get("http://localhost:8080/orders").then((response) => {
-      setOrders(response.data.data);
+      const reversedOrders = response.data.data.reverse();
+      setOrders(reversedOrders);
     });
   });
   return (

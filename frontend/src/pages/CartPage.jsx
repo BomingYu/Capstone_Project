@@ -83,7 +83,7 @@ function CartPage() {
   return (
     <div className="cartPage">
       <h1 className="pageTitle">My Cart</h1>
-      <div className="cartPageDropdowns">
+      {displayCart.length == 0? <h2>You have nothing in your cart!</h2> : <><div className="cartPageDropdowns">
         <DropdownButton
           id="dropdown-basic-button"
           title="Sort"
@@ -121,7 +121,8 @@ function CartPage() {
       </div>
       <Button variant="light" onClick={handlePayBtn}>
         Pay
-      </Button>
+      </Button></>}
+      
     </div>
   );
 }

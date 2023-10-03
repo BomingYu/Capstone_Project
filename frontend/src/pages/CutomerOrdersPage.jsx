@@ -12,14 +12,15 @@ const CustomerOrdersPage = () => {
     axios
       .get("http://localhost:8080/orders/orderByUser/" + userid)
       .then((response) => {
-        setOrders(response.data.data);
+        const reversedOrders = response.data.data.reverse();
+        setOrders(reversedOrders);
       });
   }, []);
 
   return (
     <div className="productPage">
       <h1 className="pageTitle">{userid} Order</h1>
-      <div className="orderList">
+      {orders.length > 0 ?  <div className="orderList">
         {orders.map((order) => (
           <OrderCard
             key={order.id}
@@ -31,7 +32,8 @@ const CustomerOrdersPage = () => {
             upDate={order.updatedAt}
           />
         ))}
-      </div>
+      </div>:<h2>You have no order!</h2>}
+     
     </div>
   );
 };

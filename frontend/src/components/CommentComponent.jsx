@@ -1,8 +1,11 @@
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
+import { useUserContext } from "../contexts/userContext";
 
 const CommentComponent = ({id, time , body , onChange}) => {
+
+  const {user} = useUserContext();
 
   function handleDeleteComment(){
     onChange()
@@ -16,7 +19,7 @@ const CommentComponent = ({id, time , body , onChange}) => {
         <Card.Text>
           {body}
         </Card.Text>
-        <Button variant="danger" onClick={handleDeleteComment}>Delete This Comment</Button>
+        {user && user.role == "admin" ? <Button variant="danger" onClick={handleDeleteComment}>Delete This Comment</Button> : null}
       </Card.Body>
     </Card>
   );

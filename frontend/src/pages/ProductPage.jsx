@@ -302,17 +302,20 @@ export function ProductByCategory() {
 export function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
+  const [productComments , setComents] = useState([])
   const { user } = useUserContext();
+  const [state , setState] = useState(false)
 
   useEffect(() => {
     axios.get("http://localhost:8080/products/byId/" + id)
     .then((response) => {
       setProduct(response.data.data);
+      setComents(response.data.data.comments.reverse())
     });
-  }, [id]);
+  }, [state]);
 
-  const handleTest = () => {
-    console.log(user);
+  const handleDelete = () => {
+    setState(!state)
   };
 
   return (
@@ -333,12 +336,13 @@ export function ProductDetailPage() {
         <div className="commentsDiv">
           {product.comments &&
             product.comments.length > 0 &&
-            product.comments.map((comment) => (
+            productComments.map((comment) => (
               <CommentComponent
                 id={comment.id}
                 key={comment.id}
                 time={comment.createdAt}
                 body={comment.body}
+                onChange={handleDelete}
               />
             ))}
         </div>

@@ -29,7 +29,7 @@ const CustomerOrderEditComponent = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (recName.value !== "" || phone.value !== "") {
+    if (recName.value !== "" && phone.value !== "") {
       const nameValue = recName.value;
       const phoneValue = phone.value;
       const deliveryValue = isChecked;
@@ -43,11 +43,19 @@ const CustomerOrderEditComponent = ({
       let orderData;
 
       if(deliveryValue){
-         orderData = {
+        if(newAddress.value != "")
+        {
+          orderData = {
           recipient : nameValue,
           phone : phoneValue,
           delivery : deliveryValue,
           address : addressValue
+        }
+        }
+        else{
+          setShowAlert(true);
+          setAlertHeading("If delivery is required, the address cannot be empty!");
+          return;
         }
       }
       else{

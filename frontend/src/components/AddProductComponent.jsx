@@ -103,7 +103,7 @@ const AddProductComponent = () => {
   };
 
   return (
-    <div>
+
       <Form onSubmit={handleAddNewProduct} className="addNewProductForm">
         <Form.Control
           type="text"
@@ -201,8 +201,6 @@ const AddProductComponent = () => {
           ></AlertMessage>
         </div>
       </Form>
-      
-    </div>
   );
 };
 

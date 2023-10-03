@@ -65,8 +65,7 @@ function NavBar() {
             )}
 
             {user? <NavLink className="navBarText" to={"/myorders/"+user.id}>My Orders</NavLink>:null}
-
-            <NavDropdown title="Admin" className="navBarText">
+            {user && user.role == "admin" ? <NavDropdown title="Admin" className="navBarText">
             <NavLink
                 className="navBarText navDropdownItem"
                 to={"/adminProducts"}
@@ -85,7 +84,8 @@ function NavBar() {
               >
                 Admin Orders
               </NavLink>
-            </NavDropdown>
+            </NavDropdown> : null}
+            
             
           </Nav>
           {user? <NavLink className="navBarText myCartLink" to={"/carts"}><img src={basket} alt="My Cart" className="myCartBasket logo"/></NavLink> : null}
