@@ -11,6 +11,9 @@ import AlertMessage from "../components/AlertComponent";
 import Dropdown from "react-bootstrap/Dropdown";
 
 export default function AdminProductPage() {
+  useEffect(()=>{
+    document.title = "Admin Products"
+  },[])
   return (
     <div className="adminOrderPage">
       <h1 className="pageTitle">Manage Products</h1>

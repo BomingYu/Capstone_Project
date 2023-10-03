@@ -17,6 +17,7 @@ function CustomerOrderItemPage() {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
+    document.title = "Order Details"
     axios
       .get("http://localhost:8080/orderItems/getOrderItemsbyOrderid/" + orderid)
       .then((response) => {

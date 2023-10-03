@@ -30,14 +30,14 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="navBarList">
             <NavDropdown title="Products" className="navBarText">
-              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Fruit"}>Fruit</NavLink><br/>
-              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Vegetable"}>Vegetable</NavLink><br/>
-              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Dairy"}>Dairy</NavLink><br/>
-              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Seasoning"}>Seasoning</NavLink><br/>
-              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Drink"}>Drink</NavLink><br/>
-              <NavLink className="navBarText navDropdownItem" to={"/products/byCategory/Misc"}>Misc</NavLink>
+              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Fruit"}>Fruit</NavLink><br/>
+              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Vegetable"}>Vegetable</NavLink><br/>
+              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Dairy"}>Dairy</NavLink><br/>
+              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Seasoning"}>Seasoning</NavLink><br/>
+              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Drink"}>Drink</NavLink><br/>
+              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Misc"}>Misc</NavLink>
               <NavDropdown.Divider />
-              <NavLink className="navBarText navDropdownItem" to={"/products"}>
+              <NavLink className="navBarText navDropDownItem" to={"/products"}>
                 All Products
               </NavLink>
             </NavDropdown>
@@ -45,14 +45,14 @@ function NavBar() {
             {user ? (
               <NavDropdown title="My Account" className="navBarText">
                 <NavLink
-                  className="navBarText navDropdownItem"
+                  className="navBarText navDropDownItem"
                   to={"/settingPassword"}
                 >
                   Setting
                 </NavLink>
                 <NavDropdown.Divider />
                 <NavLink
-                  className="navBarText navDropdownItem"
+                  className="navBarText navDropDownItem"
                   onClick={handleLogout}
                 >
                   Logout
@@ -67,19 +67,19 @@ function NavBar() {
             {user? <NavLink className="navBarText" to={"/myorders/"+user.id}>My Orders</NavLink>:null}
             {user && user.role == "admin" ? <NavDropdown title="Admin" className="navBarText">
             <NavLink
-                className="navBarText navDropdownItem"
+                className="navBarText navDropDownItem"
                 to={"/adminProducts"}
               >
                 Edit Products
               </NavLink><br/>
               <NavLink
-                className="navBarText navDropdownItem"
+                className="navBarText navDropDownItem"
                 to={"/adminProduct/add"}
               >
                 New Product
               </NavLink><br/>
               <NavLink
-                className="navBarText navDropdownItem"
+                className="navBarText navDropDownItem"
                 to={"/adminOrders"}
               >
                 Admin Orders

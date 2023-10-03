@@ -11,6 +11,7 @@ const OrderItemPage = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    document.title = "Confirm Order"
     if (user) {
       axios.get("http://localhost:8080/carts/" + user.id).then((response) => {
         console.log(response.data.data);

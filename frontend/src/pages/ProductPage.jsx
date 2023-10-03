@@ -48,6 +48,9 @@ const fromHighPrice = (arr) => {
 };
 
 export default function ProductPage() {
+  useEffect(()=>{
+    document.title = "Products"
+  },[])
   return (
     <div className="productPage">
       <Outlet />
@@ -206,6 +209,7 @@ export function ProductByCategory() {
       .catch((error) => {
         console.error("Error fetching products:", error);
       });
+      
   }, [category]);
 
   const lastProductIndex = currentPage * productsPerPage;

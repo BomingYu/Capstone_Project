@@ -11,6 +11,7 @@ const CustomerOrdersPage = () => {
 
 
   useEffect(() => {
+    document.title = "My Orders"
     axios
       .get("http://localhost:8080/orders/orderByUser/" + userid)
       .then((response) => {

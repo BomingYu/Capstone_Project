@@ -8,6 +8,9 @@ import AlertMessage from "../components/AlertComponent";
 import Button from 'react-bootstrap/Button';
 
 export default function AdminOrderPage() {
+  useEffect(()=>{
+    document.title = "Admin Orders"
+  },[])
   return (
     <div className="adminOrderPage">
       <h1 className="pageTitle">Manage Customers Orders</h1>
