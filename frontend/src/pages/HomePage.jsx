@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import AdminProductInput from "../components/AdminProductInput";
 import EditProductCardComponent from "../components/EditProductCardComponent";
 import { useUserContext } from "../contexts/userContext";
 
 function HomePage() {
   const { user } = useUserContext();
+  useEffect(()=>{
+    document.title = "Home"
+  },[])
   return (
     <div className="productPage">
       {user ? (
