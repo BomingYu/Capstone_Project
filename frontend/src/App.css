@@ -378,6 +378,15 @@ body {
   flex-wrap: wrap;
   gap: 10px;
 }
+
+.navBarLeftSide{
+  font-family: 'Saira', sans-serif;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 .avaText{
   color: blue;
 }

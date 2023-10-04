@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const Model = require("../models");
 
 const getAllProducts = (req, res) => {
@@ -52,13 +53,13 @@ const getProductsByCategory = (req, res) => {
   }).then((products) => res.status(200).send({ result: 200, data: products }));
 };
 
-const getProductsByAvailable = (req,res) => {
-  const available = req.params.available
+const getProductsByAvailable = (req, res) => {
+  const available = req.params.available;
   Model.Product.findAll({
-    where: { available : available },
+    where: { available: available },
     include: [{ model: Model.Rate }],
   }).then((products) => res.status(200).send({ result: 200, data: products }));
-}
+};
 
 const getProductWithRate = (req, res) => {
   Model.Product.findAll({
@@ -134,6 +135,17 @@ const getAvailableProductByCategory = (req, res) => {
   }).then((products) => res.status(200).send({ result: 200, data: products }));
 };
 
+const searchProductsByName = (req, res) => {
+  const searchName = req.params.name;
+  Model.Product.findAll({
+    where: {
+      name: { [Op.like]: `%${searchName}%` },
+      available: true,
+    },
+    include: [{ model: Model.Rate }],
+  }).then((products) => res.status(200).send({ result: 200, data: products }));
+};
+
 module.exports = {
   getAllProducts,
   addNewProduct,
@@ -143,5 +155,6 @@ module.exports = {
   updateProduct,
   getAllAvailableProduct,
   getAvailableProductByCategory,
-  getProductsByAvailable
+  getProductsByAvailable,
+  searchProductsByName
 };

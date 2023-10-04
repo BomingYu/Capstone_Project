@@ -39,4 +39,8 @@ router.get("/getProductsByAvailable/:available" , (req,res) => {
     Controller.productController.getProductsByAvailable(req,res)
 })
 
+router.get("/searchProductsByName/:name" , (req,res) => {
+    Controller.productController.searchProductsByName(req,res)
+})
+
 module.exports = router;

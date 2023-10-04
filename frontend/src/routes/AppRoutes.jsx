@@ -5,7 +5,7 @@ import SignupPage from "../pages/SignupPage";
 import SettingPasswordPage from "../pages/SettingPassworPage";
 import ProtectedRoute from "./ProtectedRoutes";
 import AddProductPage from "../pages/AddProductPage";
-import ProductPage, { AllProducts, ProductByCategory , ProductDetailPage} from "../pages/ProductPage";
+import ProductPage, { AllProducts, ProductByCategory , ProductDetailPage, SearchedProductPage} from "../pages/ProductPage";
 import CartPage from "../pages/CartPage";
 import OrderItemPage from "../pages/OrderItemPage";
 import OrderPage from "../pages/OrderPage";
@@ -28,6 +28,7 @@ function AppRoutes(props){
                 <Route index element={<AllProducts />}/>
                 <Route path="byCategory/:category" element={<ProductByCategory />}/>
                 <Route path="byId/:id" element={<ProductDetailPage />}/>
+                <Route path="searchProduct/:searchName" element={<SearchedProductPage />}/>
             </Route>
             <Route path="/orderItems" element={<ProtectedRoute><OrderItemPage /></ProtectedRoute>}/>
             <Route path="/carts" element={<ProtectedRoute><CartPage {...props} /></ProtectedRoute>} />

@@ -48,9 +48,9 @@ const fromHighPrice = (arr) => {
 };
 
 export default function ProductPage() {
-  useEffect(()=>{
-    document.title = "Products"
-  },[])
+  useEffect(() => {
+    document.title = "Products";
+  }, []);
   return (
     <div className="productPage">
       <Outlet />
@@ -201,7 +201,10 @@ export function ProductByCategory() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/products/getAvailableProductByCategory/" + category)
+      .get(
+        "http://localhost:8080/products/getAvailableProductByCategory/" +
+          category
+      )
       .then((response) => {
         setProducts(response.data.data);
         setDisplayProducts(response.data.data);
@@ -209,7 +212,6 @@ export function ProductByCategory() {
       .catch((error) => {
         console.error("Error fetching products:", error);
       });
-      
   }, [category]);
 
   const lastProductIndex = currentPage * productsPerPage;
@@ -306,27 +308,28 @@ export function ProductByCategory() {
 export function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-  const [productComments , setComents] = useState([])
+  const [productComments, setComents] = useState([]);
   const { user } = useUserContext();
-  const [state , setState] = useState(false)
+  const [state, setState] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/products/byId/" + id)
-    .then((response) => {
+    axios.get("http://localhost:8080/products/byId/" + id).then((response) => {
       setProduct(response.data.data);
-      setComents(response.data.data.comments.reverse())
+      setComents(response.data.data.comments.reverse());
     });
   }, [state]);
 
   const handleDelete = () => {
-    setState(!state)
+    setState(!state);
   };
 
   return (
     <div className="detailDiv">
       <ProductDetailComponent
-        id = {product.id}
-        picFile={product.picFile?"http://localhost:8080/" + product.picFile:""}
+        id={product.id}
+        picFile={
+          product.picFile ? "http://localhost:8080/" + product.picFile : ""
+        }
         name={product.name}
         price={product.price}
         unit={product.unit}
@@ -335,22 +338,140 @@ export function ProductDetailPage() {
         down={getDownCount(product.rates)}
       />
 
-      {user ? <CommentInputComponent userid={user.id} productid={product.id} /> : null}
+      {user ? (
+        <CommentInputComponent userid={user.id} productid={product.id} />
+      ) : null}
 
-        <div className="commentsDiv">
-          {product.comments &&
-            product.comments.length > 0 &&
-            productComments.map((comment) => (
-              <CommentComponent
-                id={comment.id}
-                key={comment.id}
-                time={comment.createdAt}
-                body={comment.body}
-                onChange={handleDelete}
+      <div className="commentsDiv">
+        {product.comments &&
+          product.comments.length > 0 &&
+          productComments.map((comment) => (
+            <CommentComponent
+              id={comment.id}
+              key={comment.id}
+              time={comment.createdAt}
+              body={comment.body}
+              onChange={handleDelete}
+            />
+          ))}
+      </div>
+    </div>
+  );
+}
+
+export function SearchedProductPage() {
+  const { searchName } = useParams();
+  const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(8);
+  const [displayProducts, setDisplayProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/products/searchProductsByName/" + searchName)
+      .then((response) => {
+        setProducts(response.data.data);
+        setDisplayProducts(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, [searchName]);
+
+  const lastProductIndex = currentPage * productsPerPage;
+  const firstProductIndex = lastProductIndex - productsPerPage;
+  const currentProducts = displayProducts.slice(
+    firstProductIndex,
+    lastProductIndex
+  );
+  const maxPage = Math.ceil(products.length / productsPerPage);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= maxPage) {
+      setCurrentPage(newPage);
+    }
+  };
+  const handleAscending = () => {
+    setDisplayProducts(ascendingNameSort(products));
+  };
+  const handleDescending = () => {
+    setDisplayProducts(descendingNameSort(products));
+  };
+  const handleFromLowPrice = () => {
+    setDisplayProducts(fromLowPrice(products));
+  };
+  const handleFromHighPrice = () => {
+    setDisplayProducts(fromHighPrice(products));
+  };
+
+  return (
+    <div className="productListPageBody">
+      <h1>Searched Products</h1>
+      {products.length == 0 ? (
+        <h2>Product {searchName} Not Found!</h2>
+      ) : (
+        <>
+          <div className="dropdownBtns">
+            <DropdownButton
+              id="dropdown-basic-button"
+              title="Sort"
+              variant="secondary"
+            >
+              <Dropdown.Item onClick={handleAscending}>
+                Ascending Order by Name
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleDescending}>
+                Descending Order by Name
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleFromLowPrice}>
+                From Lowest Price
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleFromHighPrice}>
+                From Highest Price
+              </Dropdown.Item>
+            </DropdownButton>
+          </div>
+          <div className="productList">
+            {currentProducts.map((product) => (
+              <ProducrCard
+                id={product.id}
+                key={product.id}
+                picUrl={"http://localhost:8080/" + product.picFile}
+                title={product.name}
+                price={product.price}
+                unit={product.unit}
+                up={getUpCount(product.rates)}
+                down={getDownCount(product.rates)}
               />
             ))}
-        </div>
-
+          </div>
+          <div className="pagination">
+            <Button
+              variant="light"
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              Previous
+            </Button>
+            {Array.from({
+              length: Math.ceil(products.length / productsPerPage),
+            }).map((_, index) => (
+              <Button
+                key={index}
+                variant="light"
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </Button>
+            ))}
+            <Button
+              variant="light"
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              Next
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

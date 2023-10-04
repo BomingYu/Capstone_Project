@@ -4,8 +4,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "../assets/logo/logo.png";
-import basket from "../assets/icons/basket.png"
+import basket from "../assets/icons/basket.png";
 import { useUserContext } from "../contexts/userContext";
+import SearchComponent from "./SearchComponent";
 
 function NavBar() {
   const { user, setUser } = useUserContext();
@@ -30,12 +31,47 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="navBarList">
             <NavDropdown title="Products" className="navBarText">
-              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Fruit"}>Fruit</NavLink><br/>
-              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Vegetable"}>Vegetable</NavLink><br/>
-              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Dairy"}>Dairy</NavLink><br/>
-              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Seasoning"}>Seasoning</NavLink><br/>
-              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Drink"}>Drink</NavLink><br/>
-              <NavLink className="navBarText navDropDownItem" to={"/products/byCategory/Misc"}>Misc</NavLink>
+              <NavLink
+                className="navBarText navDropDownItem"
+                to={"/products/byCategory/Fruit"}
+              >
+                Fruit
+              </NavLink>
+              <br />
+              <NavLink
+                className="navBarText navDropDownItem"
+                to={"/products/byCategory/Vegetable"}
+              >
+                Vegetable
+              </NavLink>
+              <br />
+              <NavLink
+                className="navBarText navDropDownItem"
+                to={"/products/byCategory/Dairy"}
+              >
+                Dairy
+              </NavLink>
+              <br />
+              <NavLink
+                className="navBarText navDropDownItem"
+                to={"/products/byCategory/Seasoning"}
+              >
+                Seasoning
+              </NavLink>
+              <br />
+              <NavLink
+                className="navBarText navDropDownItem"
+                to={"/products/byCategory/Drink"}
+              >
+                Drink
+              </NavLink>
+              <br />
+              <NavLink
+                className="navBarText navDropDownItem"
+                to={"/products/byCategory/Misc"}
+              >
+                Misc
+              </NavLink>
               <NavDropdown.Divider />
               <NavLink className="navBarText navDropDownItem" to={"/products"}>
                 All Products
@@ -64,32 +100,45 @@ function NavBar() {
               </NavLink>
             )}
 
-            {user? <NavLink className="navBarText" to={"/myorders/"+user.id}>My Orders</NavLink>:null}
-            {user && user.role == "admin" ? <NavDropdown title="Admin" className="navBarText">
-            <NavLink
-                className="navBarText navDropDownItem"
-                to={"/adminProducts"}
-              >
-                Edit Products
-              </NavLink><br/>
-              <NavLink
-                className="navBarText navDropDownItem"
-                to={"/adminProduct/add"}
-              >
-                New Product
-              </NavLink><br/>
-              <NavLink
-                className="navBarText navDropDownItem"
-                to={"/adminOrders"}
-              >
-                Admin Orders
+            {user ? (
+              <NavLink className="navBarText" to={"/myorders/" + user.id}>
+                My Orders
               </NavLink>
-            </NavDropdown> : null}
-            
-            
+            ) : null}
+            {user && user.role == "admin" ? (
+              <NavDropdown title="Admin" className="navBarText">
+                <NavLink
+                  className="navBarText navDropDownItem"
+                  to={"/adminProducts"}
+                >
+                  Edit Products
+                </NavLink>
+                <br />
+                <NavLink
+                  className="navBarText navDropDownItem"
+                  to={"/adminProduct/add"}
+                >
+                  New Product
+                </NavLink>
+                <br />
+                <NavLink
+                  className="navBarText navDropDownItem"
+                  to={"/adminOrders"}
+                >
+                  Admin Orders
+                </NavLink>
+              </NavDropdown>
+            ) : null}
           </Nav>
-          {user? <NavLink className="navBarText myCartLink" to={"/carts"}><img src={basket} alt="My Cart" className="myCartBasket logo"/></NavLink> : null}
-          
+          <div className="navBarLeftSide">
+              <SearchComponent className="navBarText" />
+
+            {user ? (
+              <NavLink className="navBarText myCartLink" to={"/carts"}>
+                <img src={basket} alt="My Cart" className="myCartBasket logo" />
+              </NavLink>
+            ) : null}
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
