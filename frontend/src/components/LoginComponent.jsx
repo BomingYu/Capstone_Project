@@ -17,10 +17,7 @@ function LoginComponent() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(userEmail)
-  console.log(userPassword)
-    console.log(userEmail.value)
-    console.log(userPassword.value)
+    
     if (userEmail.value != "" || userPassword.value != "") {
       const userData = { email: userEmail.value, password: userPassword.value };
 
@@ -28,14 +25,16 @@ function LoginComponent() {
         .post("http://localhost:8080/users/login", userData)
         .then((response) => {
           if (response.data.result == 200) {
-            console.log("login successful: ", response.data.data);
+
             const currentUser = response.data.data;
-            console.log(currentUser.userName);
+            console.log(currentUser)
             setUser(currentUser);
             navigate("/");
+            console.log(currentUser.token)
           }
         })
         .catch((error) => {
+          console.log(error)
           if (error.response.status == 400) {
             setErrorMessage(error.response.data);
           }

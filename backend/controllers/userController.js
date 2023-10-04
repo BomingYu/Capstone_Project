@@ -1,10 +1,20 @@
 const Model = require("../models/index");
 const bcrypt = require("bcryptjs");
+const { createToken } = require("../middleware/userAuth");
 
-const getAllUsers = (req, res) => {
+const getUsers = (req, res) => {
   Model.User.findAll({})
-    .then((users) => res.send({ result: 200, data: users }))
-    .catch((error) => res.send({ result: 500, error: error }));
+    .then(function (data) {
+      res
+        .status(200)
+        .json({ result: "User data fetched successfully", data: data });
+    })
+    .catch((err) => {
+      res.status(500).json({ result: err.message });
+    });
+  // Model.User.findAll({})
+  //   .then((users) => res.send({ result: 200, data: users }))
+  //   .catch((error) => res.send({ result: 500, error: error }));
 };
 
 const createUser = (data, res) => {
@@ -19,25 +29,32 @@ const createUser = (data, res) => {
     .catch((error) => res.send({ result: 500, data: error }));
 };
 
-const loginUser = (data, res) => {
-  const email = data.email;
-  const pword = data.password;
-  Model.User.findOne({ where: { email: email } })
+const loginUser = (req, res) => {
+  const email = req.body.email;
+  const pword = req.body.password;
+  Model.User.findOne( { raw: true, where: { email: email }} )
     .then((user) => {
       if (user) {
+        //console.log("CutomOutputUser",user.id)
         const hashedPassword = user.password;
         const passworMatch = bcrypt.compareSync(pword, hashedPassword);
         if (passworMatch) {
+          const token = createToken(user.id, email);
+          user.token = token;
+          console.log("CustomOutput", user);
           return res.status(200).send({ result: 200, data: user });
         } else {
           return res.status(400).send("Incorrect password");
         }
-      }
-      else{
-        return res.status(404).send(`Cannot find the email ${email}`)
+      } else {
+        return res.status(404).send(`Cannot find the email ${email}`);
       }
     })
-    .catch((error) => res.status(500).send("Some unknown error happened, please try agina later."));
+    .catch(() =>
+      res
+        .status(500)
+        .send("Some unknown error happened, please try agina later.")
+    );
 };
 
 const changeUserSetting = (req, res) => {
@@ -65,7 +82,11 @@ const changeUserSetting = (req, res) => {
         }
       }
     })
-    .catch((error) => res.status(500).send("Some unknown error happened, please try agina later."));
+    .catch((error) =>
+      res
+        .status(500)
+        .send("Some unknown error happened, please try agina later.")
+    );
 };
 
 const encode = (input) => {
@@ -74,4 +95,4 @@ const encode = (input) => {
   return output;
 };
 
-module.exports = { getAllUsers, createUser, loginUser, changeUserSetting };
+module.exports = { getUsers, createUser, loginUser, changeUserSetting };

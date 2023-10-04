@@ -1,17 +1,19 @@
 const Controller = require("../controllers");
+const {verifyToken} = require('../middleware/userAuth')
 const express = require("express")
 const router = express.Router();
 
-router.get("/" , (req,res) => {
-    Controller.userController.getAllUsers(req,res)
+
+router.get("/" , verifyToken , (req,res) => {
+    Controller.userController.getUsers(req,res)
 })
 
 router.post("/signup" , (req,res) => {
     Controller.userController.createUser(req.body , res);
 })
 
-router.post("/login", (req,res) => {
-    Controller.userController.loginUser(req.body , res);
+router.post("/login" , (req,res) => {
+    Controller.userController.loginUser(req , res);
 })
 
 router.put("/:id" , (req, res) => {
