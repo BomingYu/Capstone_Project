@@ -15,9 +15,18 @@ const ProductDetailComponent = ({id , picFile , name , price , unit , descriptio
   const [alertVariant, setAlertVariant] = useState();
   const [alertHeading, setAlertHeading] = useState();
 
+  function isEmptyObj(){
+    const propertise = Object.keys(user)
+    if(propertise.length == 0){
+      return true
+    }
+    else{
+      return false
+    }
+  }
 
   const handleAddToCart = () => {
-    if(user){
+    if(!isEmptyObj()){
       console.log(id)
       console.log(user.id)
       const cartData = {

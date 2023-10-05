@@ -312,6 +312,16 @@ export function ProductDetailPage() {
   const { user } = useUserContext();
   const [state, setState] = useState(false);
 
+  function isEmptyObj(){
+    const propertise = Object.keys(user)
+    if(propertise.length == 0){
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
   useEffect(() => {
     axios.get("http://localhost:8080/products/byId/" + id).then((response) => {
       setProduct(response.data.data);
@@ -338,7 +348,7 @@ export function ProductDetailPage() {
         down={getDownCount(product.rates)}
       />
 
-      {user ? (
+      {!isEmptyObj() ? (
         <CommentInputComponent userid={user.id} productid={product.id} />
       ) : null}
 

@@ -7,6 +7,16 @@ const CommentComponent = ({id, time , body , onChange}) => {
 
   const {user} = useUserContext();
 
+  function isEmptyObj(){
+    const propertise = Object.keys(user)
+    if(propertise.length == 0){
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
   function handleDeleteComment(){
     onChange()
     axios.delete("http://localhost:8080/comments/"+id)
@@ -19,7 +29,7 @@ const CommentComponent = ({id, time , body , onChange}) => {
         <Card.Text>
           {body}
         </Card.Text>
-        {user && user.role == "admin" ? <Button variant="danger" onClick={handleDeleteComment}>Delete This Comment</Button> : null}
+        {!isEmptyObj() && user.role == "admin" ? <Button variant="danger" onClick={handleDeleteComment}>Delete This Comment</Button> : null}
       </Card.Body>
     </Card>
   );

@@ -228,7 +228,6 @@ const OrderComponent = () => {
         <Button variant="light" type="submit" id="componentBtn">
           Submit
         </Button>
-        <button onClick={handleTest}>test</button>
       </div>
     </Form>
   );

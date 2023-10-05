@@ -7,7 +7,7 @@ export const UserProvider = (props) => {
   //const [user, setUser] = useState(null);
   const [cookies , setCookie , removeCookie] = useCookies(['user'])
   console.log(cookies)
-  const [user , setCurrentUser] = useState(cookies.user ? cookies.user : null)
+  const [user , setCurrentUser] = useState(cookies.user ? cookies.user : {})
 
   const setUser = (newuser) => {
     if(newuser.token){

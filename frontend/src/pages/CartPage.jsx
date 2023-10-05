@@ -43,6 +43,16 @@ function CartPage() {
   const [state, setState] = useState(false);
   const navigate = useNavigate();
 
+  function isEmptyObj(){
+    const propertise = Object.keys(user)
+    if(propertise.length == 0){
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
   useEffect(() => {
     document.title = "My Cart"
     if (user) {

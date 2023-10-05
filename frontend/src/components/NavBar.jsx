@@ -13,9 +13,19 @@ function NavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setUser(null);
+    setUser({});
     navigate("/");
   };
+
+  function isEmptyObj(){
+    const propertise = Object.keys(user)
+    if(propertise.length == 0){
+      return true
+    }
+    else{
+      return false
+    }
+  }
 
   return (
     <Navbar expand="lg" className="navBar">
@@ -78,7 +88,7 @@ function NavBar() {
               </NavLink>
             </NavDropdown>
 
-            {user ? (
+            {!isEmptyObj() ? (
               <NavDropdown title="My Account" className="navBarText">
                 <NavLink
                   className="navBarText navDropDownItem"
@@ -100,12 +110,12 @@ function NavBar() {
               </NavLink>
             )}
 
-            {user ? (
+            {!isEmptyObj() ? (
               <NavLink className="navBarText" to={"/myorders/" + user.id}>
                 My Orders
               </NavLink>
             ) : null}
-            {user && user.role == "admin" ? (
+            {!isEmptyObj() && user.role == "admin" ? (
               <NavDropdown title="Admin" className="navBarText">
                 <NavLink
                   className="navBarText navDropDownItem"
@@ -133,7 +143,7 @@ function NavBar() {
           <div className="navBarLeftSide">
               <SearchComponent className="navBarText" />
 
-            {user ? (
+            {!isEmptyObj() ? (
               <NavLink className="navBarText myCartLink" to={"/carts"}>
                 <img src={basket} alt="My Cart" className="myCartBasket logo" />
               </NavLink>

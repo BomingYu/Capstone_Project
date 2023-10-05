@@ -16,11 +16,21 @@ function ProducrCard({ id, picUrl , title , price , unit , up , down}) {
   const [alertVariant, setAlertVariant] = useState();
   const [alertHeading, setAlertHeading] = useState();
 
+  function isEmptyObj(){
+    const propertise = Object.keys(user)
+    if(propertise.length == 0){
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
   const handleDetailButton = () => {
     navigate("/products/byId/" + id)
   }
   const handleAddToCart = () => {
-    if(user){
+    if(!isEmptyObj()){
       console.log(id)
       console.log(user.id)
       const cartData = {
