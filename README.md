@@ -14,7 +14,7 @@ Welcome to our website's README file! Here is some basic information about our w
 Our website offers an online platform for the sale of fresh produce and essential household items, allowing users to easily browse, select, and purchase a variety of products.
 
 ### Layouts
-Main Pages
+**Main Pages**
 <div style="display: flex; justify-content: center;">
     <img src="./reportpics/product.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
     <img src="./reportpics/product2.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
@@ -22,6 +22,41 @@ Main Pages
     <img src="./reportpics/home2.png" alt="Screenshot 1" width="200">
 </div>
 
+**Login and Signup**
+<div style="display: flex; justify-content: center;">
+    <img src="./reportpics/signup2.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/login.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/login2.png" alt="Screenshot 1" width="200">
+</div>
+
+**User Pages**
+<div style="display: flex; justify-content: center;">
+    <img src="./reportpics/userchart.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/userorder.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/userorderedit.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/userbill.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/userbill2.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/userorders.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/addtocart.png" alt="Screenshot 1" width="200">
+</div>
+
+**Admin Level**
+<div style="display: flex; justify-content: center;">
+    <img src="./reportpics/adminorder.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/adminorder2.png" alt="Screenshot 1" width="200">
+</div>
+
+**Comment and Rating**
+<div style="display: flex; justify-content: center;">
+    <img src="./reportpics/comments.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/commrating2.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/commrating.png" alt="Screenshot 1" width="200">
+</div>
+
+**Database Structure**
+<div style="display: flex; justify-content: center;">
+    <img src="./reportpics/database.png" alt="Screenshot 1" width="200">
+</div>
 
 
 ## Customer Interface and Functionality
