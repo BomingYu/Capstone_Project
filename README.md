@@ -13,6 +13,16 @@ Welcome to our website's README file! Here is some basic information about our w
 
 Our website offers an online platform for the sale of fresh produce and essential household items, allowing users to easily browse, select, and purchase a variety of products.
 
+### Layouts
+Main Pages
+<div style="display: flex; justify-content: center;">
+    <img src="./reportpics/product.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/product2.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/home.png" alt="Screenshot 1" width="200" style="margin-right: 10px;">
+    <img src="./reportpics/home2.png" alt="Screenshot 1" width="200">
+</div>
+
+
 
 ## Customer Interface and Functionality
 
